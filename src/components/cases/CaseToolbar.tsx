@@ -1,0 +1,122 @@
+'use client'
+
+import { useTranslations } from 'next-intl'
+import { LayoutGrid, List, ArrowUpDown } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { cn } from '@/lib/utils'
+import { CaseSeverity } from '@/enums'
+
+enum CaseViewMode {
+  BOARD = 'board',
+  LIST = 'list',
+}
+
+enum CaseSortField {
+  CREATED = 'createdAt',
+  UPDATED = 'updatedAt',
+  SEVERITY = 'severity',
+}
+
+interface CaseToolbarProps {
+  viewMode: CaseViewMode
+  onViewModeChange: (mode: CaseViewMode) => void
+  activeSeverityFilter: CaseSeverity | undefined
+  onSeverityFilterChange: (severity: CaseSeverity | undefined) => void
+  sortField: CaseSortField
+  onSortFieldChange: (field: CaseSortField) => void
+}
+
+const severityFilters = [
+  CaseSeverity.CRITICAL,
+  CaseSeverity.HIGH,
+  CaseSeverity.MEDIUM,
+  CaseSeverity.LOW,
+] as const
+
+export { CaseViewMode, CaseSortField }
+
+export function CaseToolbar({
+  viewMode,
+  onViewModeChange,
+  activeSeverityFilter,
+  onSeverityFilterChange,
+  sortField,
+  onSortFieldChange,
+}: CaseToolbarProps) {
+  const t = useTranslations('cases')
+
+  return (
+    <div className="flex items-center justify-between gap-4">
+      <div className="flex items-center gap-2">
+        <div className="flex items-center rounded-lg border border-border">
+          <Button
+            variant={viewMode === CaseViewMode.BOARD ? 'default' : 'ghost'}
+            size="sm"
+            onClick={() => onViewModeChange(CaseViewMode.BOARD)}
+            className="rounded-e-none"
+          >
+            <LayoutGrid className="h-4 w-4" />
+            {t('viewBoard')}
+          </Button>
+          <Button
+            variant={viewMode === CaseViewMode.LIST ? 'default' : 'ghost'}
+            size="sm"
+            onClick={() => onViewModeChange(CaseViewMode.LIST)}
+            className="rounded-s-none"
+          >
+            <List className="h-4 w-4" />
+            {t('viewList')}
+          </Button>
+        </div>
+
+        <div className="mx-2 h-6 w-px bg-border" />
+
+        <div className="flex items-center gap-1.5">
+          {severityFilters.map(severity => (
+            <button
+              key={severity}
+              type="button"
+              onClick={() =>
+                onSeverityFilterChange(
+                  activeSeverityFilter === severity ? undefined : severity
+                )
+              }
+              className={cn(
+                'transition-opacity',
+                activeSeverityFilter !== undefined &&
+                  activeSeverityFilter !== severity &&
+                  'opacity-40'
+              )}
+            >
+              <Badge variant="outline" className="cursor-pointer capitalize">
+                {severity}
+              </Badge>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex items-center gap-2">
+        <ArrowUpDown className="h-4 w-4 text-muted-foreground" />
+        <Select value={sortField} onValueChange={v => onSortFieldChange(v as CaseSortField)}>
+          <SelectTrigger className="w-[140px]" size="sm">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value={CaseSortField.CREATED}>{t('sortCreated')}</SelectItem>
+            <SelectItem value={CaseSortField.UPDATED}>{t('sortUpdated')}</SelectItem>
+            <SelectItem value={CaseSortField.SEVERITY}>{t('sortSeverity')}</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+    </div>
+  )
+}

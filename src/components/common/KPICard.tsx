@@ -1,0 +1,67 @@
+'use client'
+
+import type { ReactNode } from 'react'
+import { TrendingUp, TrendingDown } from 'lucide-react'
+import { Card, CardContent } from '@/components/ui/card'
+import { cn } from '@/lib/utils'
+
+interface KPICardProps {
+  label: string
+  value: string | number
+  trend?: number | undefined
+  trendLabel?: string | undefined
+  icon: ReactNode
+  accentColor: string | undefined
+}
+
+export function KPICard({ label, value, trend, trendLabel, icon, accentColor }: KPICardProps) {
+  const isTrendPositive = trend !== undefined && trend >= 0
+
+  return (
+    <Card className="relative overflow-hidden">
+      {accentColor && (
+        <div
+          className="pointer-events-none absolute inset-0 opacity-5 blur-2xl"
+          style={{ backgroundColor: accentColor }}
+        />
+      )}
+      <CardContent className="flex items-center gap-4">
+        <div
+          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg"
+          style={{
+            backgroundColor: accentColor
+              ? `color-mix(in srgb, ${accentColor} 12%, transparent)`
+              : undefined,
+            color: accentColor,
+          }}
+        >
+          {icon}
+        </div>
+        <div className="flex flex-col gap-1">
+          <p className="text-sm text-muted-foreground">{label}</p>
+          <div className="flex items-baseline gap-2">
+            <span className="text-2xl font-bold tracking-tight">{value}</span>
+            {trend !== undefined && (
+              <span
+                className={cn(
+                  'flex items-center gap-0.5 text-xs font-medium',
+                  isTrendPositive ? 'text-status-success' : 'text-status-error'
+                )}
+              >
+                {isTrendPositive ? (
+                  <TrendingUp className="h-3 w-3" />
+                ) : (
+                  <TrendingDown className="h-3 w-3" />
+                )}
+                {Math.abs(trend)}%
+              </span>
+            )}
+          </div>
+          {trendLabel && (
+            <p className="text-xs text-muted-foreground">{trendLabel}</p>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
