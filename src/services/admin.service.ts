@@ -8,9 +8,17 @@ interface AuditLogParams {
   action?: string
 }
 
+export interface CreateTenantInput {
+  name: string
+  environment: string
+}
+
 export const adminService = {
   getTenants: () =>
     api.get<ApiResponse<Tenant[]>>('/admin/tenants').then(r => r.data),
+
+  createTenant: (data: CreateTenantInput) =>
+    api.post<ApiResponse<Tenant>>('/admin/tenants', data).then(r => r.data),
 
   getUsers: (tenantId: string) =>
     api.get<ApiResponse<TenantUser[]>>(`/admin/tenants/${tenantId}/users`).then(r => r.data),

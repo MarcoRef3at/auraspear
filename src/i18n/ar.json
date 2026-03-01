@@ -248,8 +248,39 @@
       "ipAddress": "عنوان IP",
       "noLogs": "لم يتم العثور على سجلات"
     },
+    "tenants": {
+      "title": "المستأجرون",
+      "addTenant": "إضافة مستأجر",
+      "addTenantDescription": "إنشاء منظمة مستأجر جديدة",
+      "tenantName": "اسم المستأجر",
+      "tenantNamePlaceholder": "أدخل اسم المستأجر...",
+      "environment": "البيئة",
+      "envProduction": "إنتاج",
+      "envStaging": "اختبار",
+      "envDevelopment": "تطوير",
+      "name": "الاسم",
+      "status": "الحالة",
+      "users": "المستخدمون",
+      "alerts": "التنبيهات",
+      "noTenants": "لم يتم العثور على مستأجرين",
+      "loadError": "فشل في تحميل المستأجرين",
+      "cancel": "إلغاء",
+      "create": "إنشاء مستأجر",
+      "creating": "جاري الإنشاء...",
+      "tenantCreated": "تم إنشاء المستأجر بنجاح",
+      "tenantCreateError": "فشل في إنشاء المستأجر"
+    },
     "users": {
-      "title": "إدارة المستخدمين"
+      "title": "إدارة المستخدمين",
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "role": "الدور",
+      "status": "الحالة",
+      "lastLogin": "آخر دخول",
+      "mfa": "المصادقة الثنائية",
+      "noUsers": "لم يتم العثور على مستخدمين",
+      "never": "لم يسجل الدخول",
+      "loadError": "فشل في تحميل المستخدمين"
     },
     "services": {
       "title": "صحة الخدمات",

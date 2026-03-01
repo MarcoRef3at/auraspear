@@ -1,11 +1,23 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { adminService } from '@/services'
+import type { CreateTenantInput } from '@/services/admin.service'
 import { POLLING_INTERVAL } from '@/lib/constants'
 
 export function useTenants() {
   return useQuery({
     queryKey: ['admin', 'tenants'],
     queryFn: () => adminService.getTenants(),
+  })
+}
+
+export function useCreateTenant() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: (data: CreateTenantInput) => adminService.createTenant(data),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ['admin', 'tenants'] })
+    },
   })
 }
 

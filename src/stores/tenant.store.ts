@@ -9,7 +9,7 @@ interface TenantState {
 }
 
 export const useTenantStore = create<TenantState>(set => ({
-  currentTenantId: 'tenant-1',
+  currentTenantId: 'tenant-001',
   tenants: [],
   setCurrentTenant: (id) => set({ currentTenantId: id }),
   setTenants: (tenants) => set({ tenants }),

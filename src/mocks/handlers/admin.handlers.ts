@@ -13,7 +13,21 @@ export const adminHandlers = [
     return HttpResponse.json({ data: mockTenants })
   }),
 
-  http.get('/api/admin/users', ({ request }) => {
+  http.post('/api/admin/tenants', async ({ request }) => {
+    const body = (await request.json()) as { name: string; environment: string }
+    const newTenant = {
+      id: `tenant-${String(mockTenants.length + 1).padStart(3, '0')}`,
+      name: body.name,
+      environment: body.environment,
+      alertCount: 0,
+      userCount: 0,
+      status: 'active',
+    }
+    mockTenants.push(newTenant)
+    return HttpResponse.json({ data: newTenant }, { status: 201 })
+  }),
+
+  http.get('/api/admin/tenants/:tenantId/users', ({ request }) => {
     const url = new URL(request.url)
     const page = Number(url.searchParams.get('page') ?? '1')
     const limit = Number(url.searchParams.get('limit') ?? '10')

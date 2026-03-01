@@ -1,8 +1,10 @@
 'use client'
 
+import { useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import { useQueryClient } from '@tanstack/react-query'
 import { useTenantStore } from '@/stores'
+import { useTenants } from '@/hooks'
 import {
   Select,
   SelectContent,
@@ -14,11 +16,19 @@ import {
 export function TenantSwitcher() {
   const t = useTranslations('layout')
   const queryClient = useQueryClient()
-  const { currentTenantId, tenants, setCurrentTenant } = useTenantStore()
+  const { currentTenantId, tenants, setCurrentTenant, setTenants } = useTenantStore()
+
+  const { data: tenantsData } = useTenants()
+
+  useEffect(() => {
+    if (tenantsData?.data && tenantsData.data.length > 0) {
+      setTenants(tenantsData.data)
+    }
+  }, [tenantsData?.data, setTenants])
 
   function handleTenantChange(value: string) {
     setCurrentTenant(value)
-    queryClient.invalidateQueries().catch(console.error)
+    void queryClient.invalidateQueries()
   }
 
   if (tenants.length === 0) {

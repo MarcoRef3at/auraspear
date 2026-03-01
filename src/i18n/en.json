@@ -248,8 +248,39 @@
       "ipAddress": "IP Address",
       "noLogs": "No audit logs found"
     },
+    "tenants": {
+      "title": "Tenants",
+      "addTenant": "Add Tenant",
+      "addTenantDescription": "Create a new tenant organization",
+      "tenantName": "Tenant Name",
+      "tenantNamePlaceholder": "Enter tenant name...",
+      "environment": "Environment",
+      "envProduction": "Production",
+      "envStaging": "Staging",
+      "envDevelopment": "Development",
+      "name": "Name",
+      "status": "Status",
+      "users": "Users",
+      "alerts": "Alerts",
+      "noTenants": "No tenants found",
+      "loadError": "Failed to load tenants",
+      "cancel": "Cancel",
+      "create": "Create Tenant",
+      "creating": "Creating...",
+      "tenantCreated": "Tenant created successfully",
+      "tenantCreateError": "Failed to create tenant"
+    },
     "users": {
-      "title": "User Management"
+      "title": "User Management",
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "status": "Status",
+      "lastLogin": "Last Login",
+      "mfa": "MFA",
+      "noUsers": "No users found",
+      "never": "Never",
+      "loadError": "Failed to load users"
     },
     "services": {
       "title": "Service Health",

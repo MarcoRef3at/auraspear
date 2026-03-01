@@ -1,4 +1,7 @@
 export { TenantUserTable } from './TenantUserTable'
+export { TenantListTable } from './TenantListTable'
+export { CreateTenantDialog } from './CreateTenantDialog'
+export type { CreateTenantFormValues } from './CreateTenantDialog'
 export { ServiceHealthGrid } from './ServiceHealthGrid'
 export { ServiceHealthCard } from './ServiceHealthCard'
 export { AuditLogTable } from './AuditLogTable'
