@@ -1,7 +1,7 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { ScrollText } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { DataTable } from '@/components/common/DataTable'
 import { formatTimestamp } from '@/lib/utils'
 import type { AuditLogEntry, Column } from '@/types'
@@ -18,7 +18,7 @@ export function AuditLogTable({ logs, loading = false }: AuditLogTableProps) {
     {
       key: 'timestamp',
       label: t('audit.timestamp'),
-      render: (value) => (
+      render: value => (
         <span className="font-mono text-xs">{formatTimestamp(String(value ?? ''))}</span>
       ),
     },
@@ -29,9 +29,7 @@ export function AuditLogTable({ logs, loading = false }: AuditLogTableProps) {
     {
       key: 'action',
       label: t('audit.action'),
-      render: (value) => (
-        <span className="text-sm font-medium">{String(value ?? '')}</span>
-      ),
+      render: value => <span className="text-sm font-medium">{String(value ?? '')}</span>,
     },
     {
       key: 'resource',

@@ -2,8 +2,7 @@ import api from '@/lib/api'
 import type { ApiResponse, HuntSession, HuntMessage, HuntEvent } from '@/types'
 
 export const huntService = {
-  createSession: () =>
-    api.post<ApiResponse<HuntSession>>('/hunt/sessions').then(r => r.data),
+  createSession: () => api.post<ApiResponse<HuntSession>>('/hunt/sessions').then(r => r.data),
 
   sendMessage: (sessionId: string, content: string) =>
     api

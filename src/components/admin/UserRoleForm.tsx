@@ -1,12 +1,12 @@
 'use client'
 
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
 import { useForm, Controller } from 'react-hook-form'
 import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
+import { Label } from '@/components/ui/label'
 import {
   Select,
   SelectContent,
@@ -73,9 +73,7 @@ export function UserRoleForm({
             </Select>
           )}
         />
-        {errors.role && (
-          <p className="text-sm text-destructive">{t('roles.roleRequired')}</p>
-        )}
+        {errors.role && <p className="text-destructive text-sm">{t('roles.roleRequired')}</p>}
       </div>
 
       <div className="space-y-3">
@@ -90,7 +88,7 @@ export function UserRoleForm({
                 return (
                   <label
                     key={permission}
-                    className="flex items-center gap-2 rounded-md border p-3 text-sm hover:bg-accent/50 cursor-pointer transition-colors"
+                    className="hover:bg-accent/50 flex cursor-pointer items-center gap-2 rounded-md border p-3 text-sm transition-colors"
                   >
                     <Checkbox
                       checked={isChecked}
@@ -110,7 +108,7 @@ export function UserRoleForm({
           )}
         />
         {errors.permissions && (
-          <p className="text-sm text-destructive">{t('roles.permissionsRequired')}</p>
+          <p className="text-destructive text-sm">{t('roles.permissionsRequired')}</p>
         )}
       </div>
 

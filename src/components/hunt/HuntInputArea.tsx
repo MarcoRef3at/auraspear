@@ -1,10 +1,10 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { useTranslations } from 'next-intl'
 import { Send } from 'lucide-react'
-import { Textarea } from '@/components/ui/textarea'
+import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
+import { Textarea } from '@/components/ui/textarea'
 
 interface HuntInputAreaProps {
   onSend: (message: string) => void
@@ -48,7 +48,7 @@ export function HuntInputArea({ onSend, disabled = false }: HuntInputAreaProps) 
   )
 
   return (
-    <div className="flex flex-col gap-3 border-t border-border bg-card/50 p-4">
+    <div className="border-border bg-card/50 flex flex-col gap-3 border-t p-4">
       <div className="flex gap-2">
         <Textarea
           value={value}
@@ -56,7 +56,7 @@ export function HuntInputArea({ onSend, disabled = false }: HuntInputAreaProps) 
           onKeyDown={handleKeyDown}
           placeholder={t('inputPlaceholder')}
           disabled={disabled}
-          className="min-h-10 max-h-32 resize-none"
+          className="max-h-32 min-h-10 resize-none"
         />
         <Button
           onClick={handleSend}
@@ -74,7 +74,7 @@ export function HuntInputArea({ onSend, disabled = false }: HuntInputAreaProps) 
             type="button"
             onClick={() => handleQuickPrompt(key)}
             disabled={disabled}
-            className="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs text-muted-foreground transition-colors hover:border-primary/50 hover:bg-primary/10 hover:text-foreground disabled:pointer-events-none disabled:opacity-50"
+            className="border-border bg-muted/50 text-muted-foreground hover:border-primary/50 hover:bg-primary/10 hover:text-foreground rounded-full border px-3 py-1 text-xs transition-colors disabled:pointer-events-none disabled:opacity-50"
           >
             {t(`quickPrompts.${key}`)}
           </button>

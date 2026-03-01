@@ -1,12 +1,7 @@
 import { http, HttpResponse } from 'msw'
-import {
-  mockTenants,
-  mockUsers,
-  mockServiceHealth,
-  mockAuditLogs,
-} from '../data/admin.data'
-import type { TenantUser, AuditLogEntry, PaginationMeta } from '@/types'
 import type { UserRole } from '@/enums'
+import type { TenantUser, AuditLogEntry, PaginationMeta } from '@/types'
+import { mockTenants, mockUsers, mockServiceHealth, mockAuditLogs } from '../data/admin.data'
 
 export const adminHandlers = [
   http.get('/api/admin/tenants', () => {
@@ -93,9 +88,7 @@ export const adminHandlers = [
     }
 
     if (actor) {
-      filtered = filtered.filter(log =>
-        log.actor.toLowerCase().includes(actor.toLowerCase())
-      )
+      filtered = filtered.filter(log => log.actor.toLowerCase().includes(actor.toLowerCase()))
     }
 
     if (query) {

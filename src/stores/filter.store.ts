@@ -18,9 +18,9 @@ export const useFilterStore = create<FilterState>(set => ({
   timeRange: '24h',
   agents: [],
   kqlQuery: '',
-  setSeverity: (severity) => set({ severity }),
-  setTimeRange: (timeRange) => set({ timeRange }),
-  setAgents: (agents) => set({ agents }),
-  setKqlQuery: (kqlQuery) => set({ kqlQuery }),
+  setSeverity: severity => set({ severity }),
+  setTimeRange: timeRange => set({ timeRange }),
+  setAgents: agents => set({ agents }),
+  setKqlQuery: kqlQuery => set({ kqlQuery }),
   resetFilters: () => set({ severity: [], timeRange: '24h', agents: [], kqlQuery: '' }),
 }))

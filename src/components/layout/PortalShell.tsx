@@ -1,9 +1,9 @@
 'use client'
 
 import type { ReactNode } from 'react'
+import { CommandPalette } from './CommandPalette'
 import { Sidebar } from './Sidebar'
 import { Topbar } from './Topbar'
-import { CommandPalette } from './CommandPalette'
 
 interface PortalShellProps {
   children: ReactNode
@@ -15,9 +15,7 @@ export function PortalShell({ children }: PortalShellProps) {
       <Sidebar />
       <div className="flex flex-1 flex-col overflow-hidden">
         <Topbar />
-        <main className="flex-1 overflow-y-auto p-6">
-          {children}
-        </main>
+        <main className="flex-1 overflow-y-auto p-6">{children}</main>
       </div>
       <CommandPalette />
     </div>

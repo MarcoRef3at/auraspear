@@ -1,9 +1,10 @@
 'use client'
 
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
 import { useForm, Controller } from 'react-hook-form'
 import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -12,9 +13,7 @@ import {
   DialogDescription,
   DialogFooter,
 } from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import {
   Select,
@@ -23,6 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { Textarea } from '@/components/ui/textarea'
 import { CaseSeverity } from '@/enums'
 import type { SelectOption } from '@/types'
 
@@ -99,9 +99,7 @@ export function CreateCaseDialog({
               placeholder={t('fieldTitlePlaceholder')}
               aria-invalid={errors.title ? true : undefined}
             />
-            {errors.title && (
-              <p className="text-xs text-destructive">{t('validationTitleMin')}</p>
-            )}
+            {errors.title && <p className="text-destructive text-xs">{t('validationTitleMin')}</p>}
           </div>
 
           <div className="flex flex-col gap-2">
@@ -113,7 +111,7 @@ export function CreateCaseDialog({
               aria-invalid={errors.description ? true : undefined}
             />
             {errors.description && (
-              <p className="text-xs text-destructive">{t('validationDescriptionMin')}</p>
+              <p className="text-destructive text-xs">{t('validationDescriptionMin')}</p>
             )}
           </div>
 
@@ -139,7 +137,7 @@ export function CreateCaseDialog({
                 )}
               />
               {errors.severity && (
-                <p className="text-xs text-destructive">{t('validationSeverity')}</p>
+                <p className="text-destructive text-xs">{t('validationSeverity')}</p>
               )}
             </div>
 
@@ -164,7 +162,7 @@ export function CreateCaseDialog({
                 )}
               />
               {errors.assignee && (
-                <p className="text-xs text-destructive">{t('validationAssignee')}</p>
+                <p className="text-destructive text-xs">{t('validationAssignee')}</p>
               )}
             </div>
           </div>

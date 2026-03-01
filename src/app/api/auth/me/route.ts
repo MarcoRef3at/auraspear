@@ -7,10 +7,7 @@ const currentUser = mockUsers[0]
 
 export async function GET() {
   if (!currentUser) {
-    return NextResponse.json(
-      { error: 'Not authenticated' },
-      { status: 401 }
-    )
+    return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
   }
 
   return NextResponse.json({

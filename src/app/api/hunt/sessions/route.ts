@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
-import { mockHuntSession } from '@/mocks/data/hunt.data'
 import { HuntStatus, MessageRole } from '@/enums'
+import { mockHuntSession } from '@/mocks/data/hunt.data'
 import type { HuntSession } from '@/types'
 
 export const dynamic = 'force-dynamic'

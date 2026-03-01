@@ -1,11 +1,11 @@
 'use client'
 
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { HuntStatus } from '@/enums'
+import { type HuntStatus } from '@/enums'
 import type { HuntEvent } from '@/types'
-import { HuntStatusBar } from './HuntStatusBar'
-import { HuntStatsGrid } from './HuntStatsGrid'
 import { HuntEventTable } from './HuntEventTable'
+import { HuntStatsGrid } from './HuntStatsGrid'
+import { HuntStatusBar } from './HuntStatusBar'
 
 interface HuntResultsPanelProps {
   sessionId: string
@@ -29,7 +29,7 @@ export function HuntResultsPanel({
   return (
     <div className="flex flex-1 flex-col overflow-hidden">
       <HuntStatusBar sessionId={sessionId} status={status} />
-      <ScrollArea className="flex-1 min-h-0">
+      <ScrollArea className="min-h-0 flex-1">
         <div className="space-y-4 p-4">
           <HuntStatsGrid
             eventsFound={eventsFound}

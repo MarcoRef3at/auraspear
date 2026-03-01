@@ -1,7 +1,7 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { AlertTriangle } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -16,11 +16,11 @@ export function ErrorMessage({ message, onRetry, className }: ErrorMessageProps)
 
   return (
     <div className={cn('flex flex-col items-center justify-center gap-4 py-12', className)}>
-      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-status-error">
-        <AlertTriangle className="h-6 w-6 text-status-error" />
+      <div className="bg-status-error flex h-12 w-12 items-center justify-center rounded-full">
+        <AlertTriangle className="text-status-error h-6 w-6" />
       </div>
       <div className="text-center">
-        <p className="text-sm font-medium text-status-error">
+        <p className="text-status-error text-sm font-medium">
           {message ?? t('errors.common.unknown')}
         </p>
       </div>

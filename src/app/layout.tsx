@@ -1,7 +1,10 @@
-import type { Metadata } from 'next'
+import { cookies } from 'next/headers'
 import { Toaster } from 'sonner'
 import { Providers } from './providers'
+import type { Metadata } from 'next'
 import './globals.css'
+
+const SUPPORTED_LOCALES = ['en', 'es', 'it', 'fr', 'ar', 'de'] as const
 
 export const metadata: Metadata = {
   title: 'AuraSpear SOC',
@@ -13,11 +16,16 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const locale = 'en'
+  const cookieStore = await cookies()
+  const cookieLocale = cookieStore.get('locale')?.value ?? ''
+  const locale = (SUPPORTED_LOCALES as readonly string[]).includes(cookieLocale)
+    ? cookieLocale
+    : 'en'
+  const dir = locale === 'ar' ? 'rtl' : 'ltr'
   const messages = (await import(`@/i18n/${locale}.json`)).default as Record<string, unknown>
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} dir={dir} suppressHydrationWarning>
       <body className="font-sans antialiased">
         <Providers messages={messages} locale={locale}>
           {children}

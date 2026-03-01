@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import type { CaseStatus, CaseSeverity } from '@/enums'
 import { mockCases } from '@/mocks/data/cases.data'
 import type { Case } from '@/types'
-import type { CaseStatus, CaseSeverity } from '@/enums'
 
 export const dynamic = 'force-dynamic'
 

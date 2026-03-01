@@ -10,19 +10,13 @@ export const authHandlers = [
     const password = body['password'] as string | undefined
 
     if (!email || !password) {
-      return HttpResponse.json(
-        { error: 'Email and password are required' },
-        { status: 400 }
-      )
+      return HttpResponse.json({ error: 'Email and password are required' }, { status: 400 })
     }
 
     const user = mockUsers.find(u => u.email === email)
 
     if (!user) {
-      return HttpResponse.json(
-        { error: 'Invalid credentials' },
-        { status: 401 }
-      )
+      return HttpResponse.json({ error: 'Invalid credentials' }, { status: 401 })
     }
 
     return HttpResponse.json({
@@ -46,10 +40,7 @@ export const authHandlers = [
 
   http.get('/api/auth/me', () => {
     if (!currentUser) {
-      return HttpResponse.json(
-        { error: 'Not authenticated' },
-        { status: 401 }
-      )
+      return HttpResponse.json({ error: 'Not authenticated' }, { status: 401 })
     }
 
     return HttpResponse.json({

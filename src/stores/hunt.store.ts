@@ -17,8 +17,8 @@ export const useHuntStore = create<HuntState>(set => ({
   messages: mockHuntSession.messages,
   huntStatus: HuntStatus.COMPLETED,
   huntId: mockHuntSession.id,
-  addMessage: (message) => set(state => ({ messages: [...state.messages, message] })),
-  setHuntStatus: (huntStatus) => set({ huntStatus }),
-  setHuntId: (huntId) => set({ huntId }),
+  addMessage: message => set(state => ({ messages: [...state.messages, message] })),
+  setHuntStatus: huntStatus => set({ huntStatus }),
+  setHuntId: huntId => set({ huntId }),
   clearSession: () => set({ messages: [], huntStatus: null, huntId: null }),
 }))

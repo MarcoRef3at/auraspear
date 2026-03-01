@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
-import { dashboardService } from '@/services'
 import { POLLING_INTERVAL } from '@/lib/constants'
+import { dashboardService } from '@/services'
 
 export function useKPIs() {
   return useQuery({

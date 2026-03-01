@@ -2,7 +2,6 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { useTranslations } from 'next-intl'
 import {
   LayoutDashboard,
   Bell,
@@ -13,7 +12,7 @@ import {
   Server,
   Search,
 } from 'lucide-react'
-import { useUIStore } from '@/stores'
+import { useTranslations } from 'next-intl'
 import {
   CommandDialog,
   CommandEmpty,
@@ -23,6 +22,7 @@ import {
   CommandList,
   CommandSeparator,
 } from '@/components/ui/command'
+import { useUIStore } from '@/stores'
 
 export function CommandPalette() {
   const t = useTranslations()
@@ -68,10 +68,7 @@ export function CommandPalette() {
         <CommandEmpty>{t('layout.noResults')}</CommandEmpty>
         <CommandGroup heading={t('layout.pages')}>
           {pages.map(page => (
-            <CommandItem
-              key={page.href}
-              onSelect={() => handleSelect(page.href)}
-            >
+            <CommandItem key={page.href} onSelect={() => handleSelect(page.href)}>
               <page.icon className="h-4 w-4" />
               <span>{page.label}</span>
             </CommandItem>

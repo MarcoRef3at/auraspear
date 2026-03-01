@@ -1,10 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import { useTranslations } from 'next-intl'
 import { Copy, Check } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { useTranslations } from 'next-intl'
 import { Toast } from '@/components/common/Toast'
+import { Button } from '@/components/ui/button'
 import { copyToClipboard } from '@/lib/utils'
 
 interface CopyButtonProps {

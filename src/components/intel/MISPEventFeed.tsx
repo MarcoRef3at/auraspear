@@ -1,12 +1,12 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { Globe } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { DataTable } from '@/components/common/DataTable'
 import { Badge } from '@/components/ui/badge'
-import { MISPTagPill } from './MISPTagPill'
 import { formatRelativeTime } from '@/lib/utils'
 import type { MISPEvent, MISPTag, Column } from '@/types'
+import { MISPTagPill } from './MISPTagPill'
 
 interface MISPEventFeedProps {
   events: MISPEvent[]
@@ -50,7 +50,7 @@ export function MISPEventFeed({ events, loading = false, onEventClick }: MISPEve
     {
       key: 'info',
       label: t('misp.info'),
-      render: (value) => (
+      render: value => (
         <span className="text-sm" title={String(value ?? '')}>
           {truncateInfo(String(value ?? ''))}
         </span>
@@ -59,16 +59,14 @@ export function MISPEventFeed({ events, loading = false, onEventClick }: MISPEve
     {
       key: 'threatLevel',
       label: t('misp.threatLevel'),
-      render: (value) => (
-        <Badge variant={getThreatLevelVariant(String(value ?? ''))}>
-          {String(value ?? '')}
-        </Badge>
+      render: value => (
+        <Badge variant={getThreatLevelVariant(String(value ?? ''))}>{String(value ?? '')}</Badge>
       ),
     },
     {
       key: 'tags',
       label: t('misp.tags'),
-      render: (value) => {
+      render: value => {
         const tags = value as MISPTag[] | undefined
         if (!tags || tags.length === 0) {
           return <span className="text-muted-foreground">-</span>
@@ -79,9 +77,7 @@ export function MISPEventFeed({ events, loading = false, onEventClick }: MISPEve
               <MISPTagPill key={tag.id} name={tag.name} />
             ))}
             {tags.length > 3 && (
-              <span className="text-xs text-muted-foreground">
-                +{tags.length - 3}
-              </span>
+              <span className="text-muted-foreground text-xs">+{tags.length - 3}</span>
             )}
           </div>
         )
@@ -91,15 +87,13 @@ export function MISPEventFeed({ events, loading = false, onEventClick }: MISPEve
       key: 'attributeCount',
       label: t('misp.attributes'),
       className: 'text-center',
-      render: (value) => (
-        <span className="font-mono text-sm">{String(value ?? '0')}</span>
-      ),
+      render: value => <span className="font-mono text-sm">{String(value ?? '0')}</span>,
     },
     {
       key: 'date',
       label: t('misp.lastUpdated'),
-      render: (value) => (
-        <span className="text-sm text-muted-foreground">
+      render: value => (
+        <span className="text-muted-foreground text-sm">
           {formatRelativeTime(String(value ?? ''))}
         </span>
       ),

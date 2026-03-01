@@ -1,7 +1,7 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { Activity } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { Progress } from '@/components/ui/progress'
 
 interface SidebarHealthFooterProps {
@@ -21,11 +21,11 @@ export function SidebarHealthFooter({
 
   if (collapsed) {
     return (
-      <div className="border-t border-sidebar-border p-3">
+      <div className="border-sidebar-border border-t p-3">
         <div className="flex items-center justify-center">
           <div className="relative">
-            <Activity className="h-4 w-4 text-status-success" />
-            <span className="absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full bg-status-success" />
+            <Activity className="text-status-success h-4 w-4" />
+            <span className="bg-status-success absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full" />
           </div>
         </div>
       </div>
@@ -33,25 +33,25 @@ export function SidebarHealthFooter({
   }
 
   return (
-    <div className="border-t border-sidebar-border p-4">
+    <div className="border-sidebar-border border-t p-4">
       <div className="space-y-3">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-medium text-muted-foreground">
-            {t('systemHealth')}
-          </span>
-          <span className="text-xs font-bold text-status-success">
-            {healthPercent}%
-          </span>
+          <span className="text-muted-foreground text-xs font-medium">{t('systemHealth')}</span>
+          <span className="text-status-success text-xs font-bold">{healthPercent}%</span>
         </div>
         <Progress value={healthPercent} className="h-1.5" />
-        <div className="flex items-center justify-between text-[10px] text-muted-foreground">
+        <div className="text-muted-foreground flex items-center justify-between text-[10px]">
           <div className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-status-success" />
-            <span>{t('eventsPerSecond')}: {eps.toLocaleString()}</span>
+            <span className="bg-status-success h-1.5 w-1.5 rounded-full" />
+            <span>
+              {t('eventsPerSecond')}: {eps.toLocaleString()}
+            </span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-status-info" />
-            <span>{t('lag')}: {lagMs}ms</span>
+            <span className="bg-status-info h-1.5 w-1.5 rounded-full" />
+            <span>
+              {t('lag')}: {lagMs}ms
+            </span>
           </div>
         </div>
       </div>

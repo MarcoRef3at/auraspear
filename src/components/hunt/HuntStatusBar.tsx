@@ -1,8 +1,8 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { cn } from '@/lib/utils'
 import { HuntStatus } from '@/enums'
+import { cn } from '@/lib/utils'
 
 interface HuntStatusBarProps {
   sessionId: string
@@ -37,7 +37,7 @@ export function HuntStatusBar({ sessionId, status }: HuntStatusBarProps) {
   const config = statusConfig[status]
 
   return (
-    <div className="flex items-center justify-between border-b border-border bg-card/50 px-4 py-2.5">
+    <div className="border-border bg-card/50 flex items-center justify-between border-b px-4 py-2.5">
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-2">
           <span className="relative flex h-2.5 w-2.5">
@@ -50,20 +50,13 @@ export function HuntStatusBar({ sessionId, status }: HuntStatusBarProps) {
               />
             )}
             <span
-              className={cn(
-                'relative inline-flex h-2.5 w-2.5 rounded-full',
-                config.dotClass
-              )}
+              className={cn('relative inline-flex h-2.5 w-2.5 rounded-full', config.dotClass)}
             />
           </span>
-          <span className="text-xs text-muted-foreground">
-            {t(config.labelKey)}
-          </span>
+          <span className="text-muted-foreground text-xs">{t(config.labelKey)}</span>
         </div>
       </div>
-      <span className="font-mono text-xs text-muted-foreground">
-        {sessionId}
-      </span>
+      <span className="text-muted-foreground font-mono text-xs">{sessionId}</span>
     </div>
   )
 }

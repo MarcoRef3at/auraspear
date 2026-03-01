@@ -1,8 +1,11 @@
 'use client'
 
 import type { ReactNode } from 'react'
-import { useTranslations } from 'next-intl'
 import { Inbox } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { EmptyState } from '@/components/common/EmptyState'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Skeleton } from '@/components/ui/skeleton'
 import {
   Table,
   TableBody,
@@ -11,9 +14,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Skeleton } from '@/components/ui/skeleton'
-import { EmptyState } from '@/components/common/EmptyState'
 import type { Column } from '@/types'
 
 interface DataTableProps<T> {
@@ -34,7 +34,7 @@ function getNestedValue<T>(row: T, key: string): unknown {
     if (obj !== null && obj !== undefined && typeof obj === 'object') {
       return (obj as Record<string, unknown>)[k]
     }
-    return undefined
+    return
   }, row)
 }
 
@@ -55,7 +55,9 @@ export function DataTable<T>({
   const hasSelection = selectedIds !== undefined && onSelectionChange !== undefined
 
   const allSelected =
-    hasSelection && data.length > 0 && data.every(row => {
+    hasSelection &&
+    data.length > 0 &&
+    data.every(row => {
       const id = String(keyField ? row[keyField] : (row as Record<string, unknown>)['id'])
       return selectedIds.includes(id)
     })
@@ -149,7 +151,7 @@ export function DataTable<T>({
       <TableBody>
         {data.map((row, rowIndex) => {
           const rowId = String(
-            keyField ? row[keyField] : (row as Record<string, unknown>)['id'] ?? rowIndex
+            keyField ? row[keyField] : ((row as Record<string, unknown>)['id'] ?? rowIndex)
           )
           const isSelected = hasSelection && selectedIds.includes(rowId)
 

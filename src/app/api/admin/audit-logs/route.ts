@@ -21,9 +21,7 @@ export async function GET(request: NextRequest) {
   }
 
   if (actor) {
-    filtered = filtered.filter(log =>
-      log.actor.toLowerCase().includes(actor.toLowerCase())
-    )
+    filtered = filtered.filter(log => log.actor.toLowerCase().includes(actor.toLowerCase()))
   }
 
   if (query) {

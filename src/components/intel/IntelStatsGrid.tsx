@@ -1,7 +1,7 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { Users, Globe, FileText, Link } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { KPICard } from '@/components/common/KPICard'
 
 interface IntelStats {

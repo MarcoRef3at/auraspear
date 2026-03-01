@@ -13,8 +13,7 @@ export const caseService = {
   getCases: (params?: CaseSearchParams) =>
     api.get<ApiResponse<Case[]>>('/cases', { params }).then(r => r.data),
 
-  getCase: (id: string) =>
-    api.get<ApiResponse<Case>>(`/cases/${id}`).then(r => r.data),
+  getCase: (id: string) => api.get<ApiResponse<Case>>(`/cases/${id}`).then(r => r.data),
 
   createCase: (data: CreateCaseInput) =>
     api.post<ApiResponse<Case>>('/cases', data).then(r => r.data),

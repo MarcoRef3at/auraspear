@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import type { AlertSeverity, AlertStatus } from '@/enums'
 import { mockAlerts } from '@/mocks/data/alerts.data'
 import type { Alert } from '@/types'
-import type { AlertSeverity, AlertStatus } from '@/enums'
 
 export const dynamic = 'force-dynamic'
 

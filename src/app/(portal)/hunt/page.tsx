@@ -2,11 +2,11 @@
 
 import { useCallback, useMemo } from 'react'
 import { useTranslations } from 'next-intl'
-import { HuntChatPanel, HuntResultsPanel } from '@/components/hunt'
 import { Toast } from '@/components/common'
-import { useHuntStore } from '@/stores'
-import { useCreateHuntSession, useSendHuntMessage, useHuntEvents } from '@/hooks'
+import { HuntChatPanel, HuntResultsPanel } from '@/components/hunt'
 import { HuntStatus, MessageRole } from '@/enums'
+import { useCreateHuntSession, useSendHuntMessage, useHuntEvents } from '@/hooks'
+import { useHuntStore } from '@/stores'
 
 export default function HuntPage() {
   const t = useTranslations('hunt')
@@ -43,7 +43,7 @@ export default function HuntPage() {
     (content: string) => {
       if (huntId === null) {
         createSession.mutate(undefined, {
-          onSuccess: (result) => {
+          onSuccess: result => {
             const sessionId = result.data.id
             setHuntId(sessionId)
             setHuntStatus(HuntStatus.RUNNING)
@@ -58,7 +58,7 @@ export default function HuntPage() {
             sendMessage.mutate(
               { sessionId, content },
               {
-                onSuccess: (response) => {
+                onSuccess: response => {
                   addMessage(response.data)
                   if (response.data.actions?.includes('complete')) {
                     setHuntStatus(HuntStatus.COMPLETED)
@@ -88,7 +88,7 @@ export default function HuntPage() {
       sendMessage.mutate(
         { sessionId: huntId, content },
         {
-          onSuccess: (response) => {
+          onSuccess: response => {
             addMessage(response.data)
             if (response.data.actions?.includes('complete')) {
               setHuntStatus(HuntStatus.COMPLETED)
@@ -107,12 +107,8 @@ export default function HuntPage() {
   const isSending = createSession.isPending || sendMessage.isPending
 
   return (
-    <div className="-m-6 flex h-[calc(100vh-3.5rem)] overflow-hidden bg-card">
-      <HuntChatPanel
-        messages={messages}
-        onSend={handleSend}
-        disabled={isSending}
-      />
+    <div className="bg-card -m-6 flex h-[calc(100vh-3.5rem)] overflow-hidden">
+      <HuntChatPanel messages={messages} onSend={handleSend} disabled={isSending} />
       <HuntResultsPanel
         sessionId={huntId ?? ''}
         status={huntStatus ?? HuntStatus.IDLE}

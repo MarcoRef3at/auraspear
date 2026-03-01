@@ -3,8 +3,8 @@
 import { Badge } from '@/components/ui/badge'
 import { AlertSeverity } from '@/enums'
 import { formatTimestamp, cn } from '@/lib/utils'
-import { AlertRowActions } from './AlertRowActions'
 import type { Column, Alert } from '@/types'
+import { AlertRowActions } from './AlertRowActions'
 
 function getSeverityVariant(severity: AlertSeverity): string {
   switch (severity) {
@@ -23,7 +23,7 @@ function getSeverityVariant(severity: AlertSeverity): string {
 
 function SeverityBadge({ severity }: { severity: AlertSeverity }) {
   return (
-    <Badge variant="outline" className={cn('capitalize text-xs', getSeverityVariant(severity))}>
+    <Badge variant="outline" className={cn('text-xs capitalize', getSeverityVariant(severity))}>
       {severity}
     </Badge>
   )
@@ -32,7 +32,7 @@ function SeverityBadge({ severity }: { severity: AlertSeverity }) {
 function MITREBadge({ techniques }: { techniques: string[] }) {
   const first = techniques[0]
   if (!first) {
-    return <span className="text-xs text-muted-foreground">-</span>
+    return <span className="text-muted-foreground text-xs">-</span>
   }
 
   return (
@@ -41,9 +41,7 @@ function MITREBadge({ techniques }: { techniques: string[] }) {
         {first}
       </Badge>
       {techniques.length > 1 && (
-        <span className="text-xs text-muted-foreground">
-          +{techniques.length - 1}
-        </span>
+        <span className="text-muted-foreground text-xs">+{techniques.length - 1}</span>
       )}
     </div>
   )
@@ -69,8 +67,8 @@ export function getAlertColumns(
     {
       key: 'timestamp',
       label: t.common('timestamp'),
-      render: (value) => (
-        <span className="font-mono text-xs text-muted-foreground whitespace-nowrap">
+      render: value => (
+        <span className="text-muted-foreground font-mono text-xs whitespace-nowrap">
           {formatTimestamp(String(value))}
         </span>
       ),
@@ -78,32 +76,28 @@ export function getAlertColumns(
     {
       key: 'severity',
       label: t.common('severity'),
-      render: (value) => <SeverityBadge severity={value as AlertSeverity} />,
+      render: value => <SeverityBadge severity={value as AlertSeverity} />,
     },
     {
       key: 'description',
       label: t.alerts('rule'),
       className: 'max-w-xs',
-      render: (value) => (
-        <span className="text-sm truncate block">{String(value)}</span>
-      ),
+      render: value => <span className="block truncate text-sm">{String(value)}</span>,
     },
     {
       key: 'agentName',
       label: t.alerts('agent'),
-      render: (value) => <span className="text-sm">{String(value)}</span>,
+      render: value => <span className="text-sm">{String(value)}</span>,
     },
     {
       key: 'sourceIp',
       label: t.alerts('sourceIp'),
-      render: (value) => (
-        <span className="font-mono text-xs">{String(value)}</span>
-      ),
+      render: value => <span className="font-mono text-xs">{String(value)}</span>,
     },
     {
       key: 'mitreTechniques',
       label: t.alerts('mitre'),
-      render: (value) => <MITREBadge techniques={value as string[]} />,
+      render: value => <MITREBadge techniques={value as string[]} />,
     },
     {
       key: 'actions',

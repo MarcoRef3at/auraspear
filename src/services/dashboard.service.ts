@@ -9,8 +9,7 @@ import type {
 } from '@/types'
 
 export const dashboardService = {
-  getKPIs: () =>
-    api.get<ApiResponse<DashboardKPI[]>>('/dashboard/kpis').then(r => r.data),
+  getKPIs: () => api.get<ApiResponse<DashboardKPI[]>>('/dashboard/kpis').then(r => r.data),
 
   getAlertTrends: () =>
     api.get<ApiResponse<AlertTrendPoint[]>>('/dashboard/alert-trends').then(r => r.data),

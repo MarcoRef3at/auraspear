@@ -1,11 +1,17 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useTranslations } from 'next-intl'
 import { Server, ScrollText } from 'lucide-react'
-import { PageHeader, Pagination, LoadingSpinner, ErrorMessage, EmptyState } from '@/components/common'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { useTranslations } from 'next-intl'
 import { ServiceHealthGrid, AuditLogTable } from '@/components/admin'
+import {
+  PageHeader,
+  Pagination,
+  LoadingSpinner,
+  ErrorMessage,
+  EmptyState,
+} from '@/components/common'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useServiceHealth, useAuditLogs, usePagination } from '@/hooks'
 
 export default function SystemAdminPage() {
@@ -27,10 +33,7 @@ export default function SystemAdminPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader
-        title={t('system.title')}
-        description={t('system.description')}
-      />
+      <PageHeader title={t('system.title')} description={t('system.description')} />
 
       <Card>
         <CardHeader>

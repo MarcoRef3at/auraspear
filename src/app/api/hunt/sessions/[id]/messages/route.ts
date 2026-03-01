@@ -1,33 +1,24 @@
 import { NextResponse } from 'next/server'
-import { mockHuntSession } from '@/mocks/data/hunt.data'
 import { HuntStatus, MessageRole, ReasoningStepStatus } from '@/enums'
+import { mockHuntSession } from '@/mocks/data/hunt.data'
 import type { HuntSession, HuntMessage } from '@/types'
 
 export const dynamic = 'force-dynamic'
 
 const sessions: HuntSession[] = [mockHuntSession]
 
-export async function POST(
-  request: Request,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export async function POST(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const body = (await request.json()) as Record<string, unknown>
   const sessionIndex = sessions.findIndex(s => s.id === id)
 
   if (sessionIndex === -1) {
-    return NextResponse.json(
-      { error: 'Hunt session not found' },
-      { status: 404 }
-    )
+    return NextResponse.json({ error: 'Hunt session not found' }, { status: 404 })
   }
 
   const session = sessions[sessionIndex]
   if (!session) {
-    return NextResponse.json(
-      { error: 'Hunt session not found' },
-      { status: 404 }
-    )
+    return NextResponse.json({ error: 'Hunt session not found' }, { status: 404 })
   }
 
   const now = new Date().toISOString()

@@ -14,9 +14,7 @@ export async function GET(request: NextRequest) {
 
   if (query) {
     const lowerQuery = query.toLowerCase()
-    filtered = filtered.filter(ioc =>
-      ioc.iocValue.toLowerCase().includes(lowerQuery)
-    )
+    filtered = filtered.filter(ioc => ioc.iocValue.toLowerCase().includes(lowerQuery))
   }
 
   if (iocType) {

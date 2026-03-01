@@ -1,15 +1,8 @@
 'use client'
 
 import { useState, useCallback, useEffect, useMemo } from 'react'
-import { useTranslations } from 'next-intl'
 import { ShieldAlert } from 'lucide-react'
-import {
-  PageHeader,
-  DataTable,
-  Pagination,
-  LoadingSpinner,
-  Toast,
-} from '@/components/common'
+import { useTranslations } from 'next-intl'
 import {
   KQLSearchBar,
   AlertFilterSidebar,
@@ -17,9 +10,10 @@ import {
   AlertDetailDrawer,
   AIInvestigationModal,
 } from '@/components/alerts'
+import { PageHeader, DataTable, Pagination, LoadingSpinner, Toast } from '@/components/common'
+import { AlertSeverity } from '@/enums'
 import { useAlerts, useInvestigateAlert, usePagination, useDebounce } from '@/hooks'
 import { useFilterStore } from '@/stores'
-import { AlertSeverity } from '@/enums'
 import type { Alert, AIInvestigation, AlertSearchParams } from '@/types'
 
 const SEVERITY_ORDER = [
@@ -87,23 +81,29 @@ export default function AlertsPage() {
     setDrawerOpen(true)
   }, [])
 
-  const handleInvestigate = useCallback((alert: Alert) => {
-    investigateMutation.mutate(alert.id, {
-      onSuccess: (result) => {
-        setInvestigation(result.data)
-        setInvestigationOpen(true)
-        setDrawerOpen(false)
-      },
-      onError: () => {
-        Toast.error(t('investigateError'))
-      },
-    })
-  }, [investigateMutation, t])
+  const handleInvestigate = useCallback(
+    (alert: Alert) => {
+      investigateMutation.mutate(alert.id, {
+        onSuccess: result => {
+          setInvestigation(result.data)
+          setInvestigationOpen(true)
+          setDrawerOpen(false)
+        },
+        onError: () => {
+          Toast.error(t('investigateError'))
+        },
+      })
+    },
+    [investigateMutation, t]
+  )
 
-  const handleCopyId = useCallback((id: string) => {
-    void navigator.clipboard.writeText(id)
-    Toast.success(tCommon('copied'))
-  }, [tCommon])
+  const handleCopyId = useCallback(
+    (id: string) => {
+      void navigator.clipboard.writeText(id)
+      Toast.success(tCommon('copied'))
+    },
+    [tCommon]
+  )
 
   const handleSearchSubmit = useCallback(() => {
     pagination.setPage(1)
@@ -124,11 +124,7 @@ export default function AlertsPage() {
     <div className="space-y-4">
       <PageHeader title={t('title')} description={t('description')} />
 
-      <KQLSearchBar
-        value={kqlQuery}
-        onChange={setKqlQuery}
-        onSubmit={handleSearchSubmit}
-      />
+      <KQLSearchBar value={kqlQuery} onChange={setKqlQuery} onSubmit={handleSearchSubmit} />
 
       <div className="flex gap-6">
         <div className="hidden xl:block">

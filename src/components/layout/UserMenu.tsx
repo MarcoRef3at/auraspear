@@ -1,7 +1,7 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { User, Settings, LogOut } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import {
   DropdownMenu,
@@ -20,7 +20,7 @@ export function UserMenu() {
       <DropdownMenuTrigger asChild>
         <button
           type="button"
-          className="flex items-center gap-2 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="focus-visible:ring-ring flex items-center gap-2 rounded-full outline-none focus-visible:ring-2"
         >
           <Avatar size="sm">
             <AvatarFallback className="bg-primary/10 text-primary text-xs font-semibold">
@@ -33,7 +33,7 @@ export function UserMenu() {
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col gap-1">
             <span className="text-sm font-medium">SOC Analyst</span>
-            <span className="text-xs text-muted-foreground">analyst@auraspear.io</span>
+            <span className="text-muted-foreground text-xs">analyst@auraspear.io</span>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />

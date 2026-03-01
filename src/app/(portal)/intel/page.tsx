@@ -1,11 +1,16 @@
 'use client'
 
 import { useState, useCallback, useEffect, useMemo } from 'react'
-import { useTranslations } from 'next-intl'
 import { Globe, Link2 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { PageHeader, Pagination, LoadingSpinner, EmptyState } from '@/components/common'
+import {
+  IntelStatsGrid,
+  IOCSearchBar,
+  MISPEventFeed,
+  WazuhCorrelationPanel,
+} from '@/components/intel'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { IntelStatsGrid, IOCSearchBar, MISPEventFeed, WazuhCorrelationPanel } from '@/components/intel'
 import { useMISPEvents, useIOCSearch, useCorrelations, usePagination } from '@/hooks'
 
 export default function IntelPage() {
@@ -33,7 +38,9 @@ export default function IntelPage() {
   const stats = useMemo(() => {
     const correlations = correlationsData?.data ?? []
     const ipCorrelations = correlations.filter(c => c.iocType.includes('ip'))
-    const hashCorrelations = correlations.filter(c => c.iocType.includes('sha') || c.iocType.includes('hash') || c.iocType.includes('md5'))
+    const hashCorrelations = correlations.filter(
+      c => c.iocType.includes('sha') || c.iocType.includes('hash') || c.iocType.includes('md5')
+    )
     const domainCorrelations = correlations.filter(c => c.iocType.includes('domain'))
 
     return {

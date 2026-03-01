@@ -38,7 +38,7 @@ export function KPICard({ label, value, trend, trendLabel, icon, accentColor }: 
           {icon}
         </div>
         <div className="flex flex-col gap-1">
-          <p className="text-sm text-muted-foreground">{label}</p>
+          <p className="text-muted-foreground text-sm">{label}</p>
           <div className="flex items-baseline gap-2">
             <span className="text-2xl font-bold tracking-tight">{value}</span>
             {trend !== undefined && (
@@ -57,9 +57,7 @@ export function KPICard({ label, value, trend, trendLabel, icon, accentColor }: 
               </span>
             )}
           </div>
-          {trendLabel && (
-            <p className="text-xs text-muted-foreground">{trendLabel}</p>
-          )}
+          {trendLabel && <p className="text-muted-foreground text-xs">{trendLabel}</p>}
         </div>
       </CardContent>
     </Card>

@@ -1,8 +1,8 @@
 'use client'
 
 import { useMemo } from 'react'
-import { useTranslations } from 'next-intl'
 import { Copy, ExternalLink, Globe, Hash, Server } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { copyToClipboard } from '@/lib/utils'
 import type { CaseArtifact } from '@/types'
@@ -39,7 +39,7 @@ export function CaseArtifactPanel({ artifacts, onLookup }: CaseArtifactPanelProp
   if (artifacts.length === 0) {
     return (
       <div className="flex items-center justify-center py-8">
-        <p className="text-sm text-muted-foreground">{t('noArtifacts')}</p>
+        <p className="text-muted-foreground text-sm">{t('noArtifacts')}</p>
       </div>
     )
   }
@@ -54,22 +54,20 @@ export function CaseArtifactPanel({ artifacts, onLookup }: CaseArtifactPanelProp
         return (
           <div key={type} className="flex flex-col gap-2">
             <div className="flex items-center gap-2 text-sm font-medium">
-              <Icon className="h-4 w-4 text-muted-foreground" />
+              <Icon className="text-muted-foreground h-4 w-4" />
               <span>{label}</span>
-              <span className="text-xs text-muted-foreground">
-                ({items.length})
-              </span>
+              <span className="text-muted-foreground text-xs">({items.length})</span>
             </div>
 
             <div className="flex flex-col gap-1.5">
               {items.map(artifact => (
                 <div
                   key={artifact.id}
-                  className="flex items-center justify-between gap-2 rounded-md border border-border bg-muted/30 px-3 py-2"
+                  className="border-border bg-muted/30 flex items-center justify-between gap-2 rounded-md border px-3 py-2"
                 >
                   <div className="flex flex-col gap-0.5">
                     <span className="font-mono text-xs">{artifact.value}</span>
-                    <span className="text-[10px] text-muted-foreground">
+                    <span className="text-muted-foreground text-[10px]">
                       {t('source')}: {artifact.source}
                     </span>
                   </div>

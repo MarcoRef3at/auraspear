@@ -1,13 +1,12 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { Crosshair } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { DataTable } from '@/components/common/DataTable'
 import { SeverityBadge } from '@/components/common/SeverityBadge'
-import { formatTimestamp } from '@/lib/utils'
-import type { Column } from '@/types'
-import type { HuntEvent } from '@/types'
 import type { AlertSeverity } from '@/enums'
+import { formatTimestamp } from '@/lib/utils'
+import type { Column, HuntEvent } from '@/types'
 
 interface HuntEventTableProps {
   events: HuntEvent[]
@@ -21,8 +20,8 @@ export function HuntEventTable({ events, loading = false }: HuntEventTableProps)
     {
       key: 'timestamp',
       label: t('columnTimestamp'),
-      render: (value) => (
-        <span className="font-mono text-xs text-muted-foreground">
+      render: value => (
+        <span className="text-muted-foreground font-mono text-xs">
           {formatTimestamp(value as string)}
         </span>
       ),
@@ -30,21 +29,17 @@ export function HuntEventTable({ events, loading = false }: HuntEventTableProps)
     {
       key: 'severity',
       label: t('columnSeverity'),
-      render: (value) => <SeverityBadge severity={value as AlertSeverity} />,
+      render: value => <SeverityBadge severity={value as AlertSeverity} />,
     },
     {
       key: 'eventId',
       label: t('columnEventId'),
-      render: (value) => (
-        <span className="font-mono text-xs">{value as string}</span>
-      ),
+      render: value => <span className="font-mono text-xs">{value as string}</span>,
     },
     {
       key: 'sourceIp',
       label: t('columnSourceIp'),
-      render: (value) => (
-        <span className="font-mono text-xs">{value as string}</span>
-      ),
+      render: value => <span className="font-mono text-xs">{value as string}</span>,
     },
     {
       key: 'user',

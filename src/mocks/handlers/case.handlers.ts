@@ -1,7 +1,7 @@
 import { http, HttpResponse } from 'msw'
-import { mockCases } from '../data/cases.data'
-import type { Case, PaginationMeta } from '@/types'
 import type { CaseStatus, CaseSeverity } from '@/enums'
+import type { Case, PaginationMeta } from '@/types'
+import { mockCases } from '../data/cases.data'
 
 let cases = [...mockCases]
 
@@ -65,10 +65,7 @@ export const caseHandlers = [
     const foundCase = cases.find(c => c.id === id)
 
     if (!foundCase) {
-      return HttpResponse.json(
-        { error: 'Case not found' },
-        { status: 404 }
-      )
+      return HttpResponse.json({ error: 'Case not found' }, { status: 404 })
     }
 
     return HttpResponse.json({ data: foundCase })
@@ -115,18 +112,12 @@ export const caseHandlers = [
     const caseIndex = cases.findIndex(c => c.id === id)
 
     if (caseIndex === -1) {
-      return HttpResponse.json(
-        { error: 'Case not found' },
-        { status: 404 }
-      )
+      return HttpResponse.json({ error: 'Case not found' }, { status: 404 })
     }
 
     const existingCase = cases[caseIndex]
     if (!existingCase) {
-      return HttpResponse.json(
-        { error: 'Case not found' },
-        { status: 404 }
-      )
+      return HttpResponse.json({ error: 'Case not found' }, { status: 404 })
     }
 
     const now = new Date().toISOString()

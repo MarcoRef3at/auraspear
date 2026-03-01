@@ -1,10 +1,9 @@
 'use client'
 
 import { useState, useCallback, useMemo } from 'react'
-import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { Plus, FolderOpen } from 'lucide-react'
-import { PageHeader, LoadingSpinner, Toast, EmptyState } from '@/components/common'
+import { useTranslations } from 'next-intl'
 import {
   CaseToolbar,
   CaseViewMode,
@@ -12,10 +11,11 @@ import {
   CaseKanbanBoard,
   CreateCaseDialog,
 } from '@/components/cases'
+import type { CreateCaseFormValues } from '@/components/cases'
+import { PageHeader, LoadingSpinner, Toast, EmptyState } from '@/components/common'
+import type { CaseSeverity } from '@/enums'
 import { useCases, useCreateCase } from '@/hooks'
 import type { Case } from '@/types'
-import type { CreateCaseFormValues } from '@/components/cases'
-import type { CaseSeverity } from '@/enums'
 
 const ASSIGNEE_OPTIONS = [
   { label: 'Ahmed Al-Rashid', value: 'ahmed' },
@@ -29,14 +29,14 @@ export default function CasesPage() {
   const router = useRouter()
 
   const [viewMode, setViewMode] = useState(CaseViewMode.BOARD)
-  const [severityFilter, setSeverityFilter] = useState<CaseSeverity | undefined>(undefined)
+  const [severityFilter, setSeverityFilter] = useState<CaseSeverity | undefined>()
   const [sortField, setSortField] = useState(CaseSortField.UPDATED)
   const [createDialogOpen, setCreateDialogOpen] = useState(false)
 
   const { data, isLoading } = useCases(
-    severityFilter !== undefined
-      ? { severity: severityFilter, sortBy: sortField }
-      : { sortBy: sortField }
+    severityFilter === undefined
+      ? { sortBy: sortField }
+      : { severity: severityFilter, sortBy: sortField }
   )
 
   const createCase = useCreateCase()
@@ -107,10 +107,7 @@ export default function CasesPage() {
           description={t('emptyDescription')}
         />
       ) : (
-        <CaseKanbanBoard
-          cases={filteredCases}
-          onCaseClick={handleCaseClick}
-        />
+        <CaseKanbanBoard cases={filteredCases} onCaseClick={handleCaseClick} />
       )}
 
       <CreateCaseDialog

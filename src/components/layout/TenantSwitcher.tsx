@@ -1,10 +1,8 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useTranslations } from 'next-intl'
 import { useQueryClient } from '@tanstack/react-query'
-import { useTenantStore } from '@/stores'
-import { useTenants } from '@/hooks'
+import { useTranslations } from 'next-intl'
 import {
   Select,
   SelectContent,
@@ -12,6 +10,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { useTenants } from '@/hooks'
+import { useTenantStore } from '@/stores'
 
 export function TenantSwitcher() {
   const t = useTranslations('layout')

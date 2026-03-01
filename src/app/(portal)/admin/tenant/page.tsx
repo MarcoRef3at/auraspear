@@ -1,16 +1,12 @@
 'use client'
 
 import { useState, useCallback, useEffect } from 'react'
-import { useTranslations } from 'next-intl'
 import { Plus, Building2, Users } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { TenantUserTable, TenantListTable, CreateTenantDialog } from '@/components/admin'
+import type { CreateTenantFormValues } from '@/components/admin'
 import { PageHeader, LoadingSpinner, ErrorMessage, Toast, EmptyState } from '@/components/common'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import {
-  TenantUserTable,
-  TenantListTable,
-  CreateTenantDialog,
-} from '@/components/admin'
-import type { CreateTenantFormValues } from '@/components/admin'
 import { useTenants, useCreateTenant, useTenantUsers } from '@/hooks'
 import { useTenantStore } from '@/stores'
 import type { Tenant } from '@/types'
@@ -21,11 +17,7 @@ export default function TenantConfigPage() {
 
   const [createDialogOpen, setCreateDialogOpen] = useState(false)
 
-  const {
-    data: tenantsData,
-    isLoading: tenantsLoading,
-    isError: tenantsError,
-  } = useTenants()
+  const { data: tenantsData, isLoading: tenantsLoading, isError: tenantsError } = useTenants()
 
   const {
     data: usersData,
@@ -108,8 +100,11 @@ export default function TenantConfigPage() {
           <CardTitle className="text-base">
             {t('users.title')}
             {tenantsData?.data && (
-              <span className="ms-2 text-sm font-normal text-muted-foreground">
-                ({tenantsData.data.find(tenant => tenant.id === currentTenantId)?.name ?? currentTenantId})
+              <span className="text-muted-foreground ms-2 text-sm font-normal">
+                (
+                {tenantsData.data.find(tenant => tenant.id === currentTenantId)?.name ??
+                  currentTenantId}
+                )
               </span>
             )}
           </CardTitle>
@@ -126,10 +121,7 @@ export default function TenantConfigPage() {
               description={t('users.noUsersDescription')}
             />
           ) : (
-            <TenantUserTable
-              users={usersData?.data ?? []}
-              loading={usersLoading}
-            />
+            <TenantUserTable users={usersData?.data ?? []} loading={usersLoading} />
           )}
         </CardContent>
       </Card>

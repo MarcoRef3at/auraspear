@@ -1,19 +1,13 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Shield } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from '@/components/ui/card'
 
 export default function LoginPage() {
   const t = useTranslations('auth')
@@ -33,13 +27,13 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-4">
+    <div className="bg-background flex min-h-screen items-center justify-center p-4">
       <Card className="w-full max-w-sm">
         <CardHeader className="items-center text-center">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary">
-            <Shield className="h-6 w-6 text-primary-foreground" />
+          <div className="bg-primary flex h-12 w-12 items-center justify-center rounded-xl">
+            <Shield className="text-primary-foreground h-6 w-6" />
           </div>
-          <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
+          <p className="text-muted-foreground text-xs font-semibold tracking-widest uppercase">
             {tApp('name')}
           </p>
           <CardTitle className="text-xl">{t('welcomeBack')}</CardTitle>
@@ -61,19 +55,11 @@ export default function LoginPage() {
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <Label htmlFor="password">{t('password')}</Label>
-                <button
-                  type="button"
-                  className="text-xs text-primary hover:underline"
-                >
+                <button type="button" className="text-primary text-xs hover:underline">
                   {t('forgotPassword')}
                 </button>
               </div>
-              <Input
-                id="password"
-                type="password"
-                autoComplete="current-password"
-                required
-              />
+              <Input id="password" type="password" autoComplete="current-password" required />
             </div>
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? t('signingIn') : t('signInButton')}

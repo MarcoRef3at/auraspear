@@ -1,9 +1,9 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { CheckCircle, XCircle, Loader2, Settings } from 'lucide-react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 
 enum IntegrationStatus {
@@ -30,13 +30,13 @@ interface IntegrationConfigPanelProps {
 function getStatusIcon(status: IntegrationStatus) {
   switch (status) {
     case IntegrationStatus.CONNECTED:
-      return <CheckCircle className="h-4 w-4 text-status-success" />
+      return <CheckCircle className="text-status-success h-4 w-4" />
     case IntegrationStatus.DISCONNECTED:
-      return <XCircle className="h-4 w-4 text-status-neutral" />
+      return <XCircle className="text-status-neutral h-4 w-4" />
     case IntegrationStatus.ERROR:
-      return <XCircle className="h-4 w-4 text-status-error" />
+      return <XCircle className="text-status-error h-4 w-4" />
     default:
-      return <XCircle className="h-4 w-4 text-status-neutral" />
+      return <XCircle className="text-status-neutral h-4 w-4" />
   }
 }
 
@@ -73,7 +73,7 @@ export function IntegrationConfigPanel({
                 {getStatusIcon(integration.status)}
                 {integration.name}
               </CardTitle>
-              <p className="text-xs text-muted-foreground">{integration.description}</p>
+              <p className="text-muted-foreground text-xs">{integration.description}</p>
             </CardHeader>
             <CardContent className="space-y-3">
               {integration.configFields && Object.keys(integration.configFields).length > 0 && (
@@ -81,7 +81,7 @@ export function IntegrationConfigPanel({
                   {Object.entries(integration.configFields).map(([key, value]) => (
                     <div key={key} className="flex justify-between text-xs">
                       <span className="text-muted-foreground">{key}</span>
-                      <span className="font-mono truncate max-w-[180px]">{value}</span>
+                      <span className="max-w-[180px] truncate font-mono">{value}</span>
                     </div>
                   ))}
                 </div>
@@ -102,11 +102,7 @@ export function IntegrationConfigPanel({
                     t('integrations.testConnection')
                   )}
                 </Button>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={() => onConfigure(integration.id)}
-                >
+                <Button size="sm" variant="ghost" onClick={() => onConfigure(integration.id)}>
                   <Settings className="me-1.5 h-3 w-3" />
                   {t('integrations.configure')}
                 </Button>

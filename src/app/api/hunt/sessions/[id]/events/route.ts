@@ -7,18 +7,12 @@ export const dynamic = 'force-dynamic'
 
 const sessions: HuntSession[] = [mockHuntSession]
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const session = sessions.find(s => s.id === id)
 
   if (!session) {
-    return NextResponse.json(
-      { error: 'Hunt session not found' },
-      { status: 404 }
-    )
+    return NextResponse.json({ error: 'Hunt session not found' }, { status: 404 })
   }
 
   const { searchParams } = request.nextUrl

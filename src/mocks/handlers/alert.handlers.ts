@@ -1,7 +1,7 @@
 import { http, HttpResponse } from 'msw'
-import { mockAlerts } from '../data/alerts.data'
-import type { Alert, AIInvestigation, PaginationMeta } from '@/types'
 import type { AlertSeverity, AlertStatus } from '@/enums'
+import type { Alert, AIInvestigation, PaginationMeta } from '@/types'
+import { mockAlerts } from '../data/alerts.data'
 
 export const alertHandlers = [
   http.get('/api/alerts', ({ request }) => {
@@ -69,10 +69,7 @@ export const alertHandlers = [
     const alert = mockAlerts.find(a => a.id === id)
 
     if (!alert) {
-      return HttpResponse.json(
-        { error: 'Alert not found' },
-        { status: 404 }
-      )
+      return HttpResponse.json({ error: 'Alert not found' }, { status: 404 })
     }
 
     return HttpResponse.json({ data: alert })
@@ -83,10 +80,7 @@ export const alertHandlers = [
     const alert = mockAlerts.find(a => a.id === String(id))
 
     if (!alert) {
-      return HttpResponse.json(
-        { error: 'Alert not found' },
-        { status: 404 }
-      )
+      return HttpResponse.json({ error: 'Alert not found' }, { status: 404 })
     }
 
     const investigation: AIInvestigation = {
@@ -104,8 +98,7 @@ export const alertHandlers = [
       relatedAlerts: mockAlerts
         .filter(
           a =>
-            a.id !== alert.id &&
-            (a.agentName === alert.agentName || a.sourceIp === alert.sourceIp)
+            a.id !== alert.id && (a.agentName === alert.agentName || a.sourceIp === alert.sourceIp)
         )
         .slice(0, 3)
         .map(a => a.id),

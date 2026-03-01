@@ -2,10 +2,10 @@
 
 import { useMemo } from 'react'
 import { useTranslations } from 'next-intl'
-import { cn } from '@/lib/utils'
-import { CaseStatus } from '@/enums'
 import { Badge } from '@/components/ui/badge'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { CaseStatus } from '@/enums'
+import { cn } from '@/lib/utils'
 import type { Case } from '@/types'
 import { CaseKanbanCard } from './CaseKanbanCard'
 
@@ -73,10 +73,7 @@ export function CaseKanbanBoard({ cases, onCaseClick }: CaseKanbanBoardProps) {
                   />
                 )}
                 <span
-                  className={cn(
-                    'relative inline-flex h-2.5 w-2.5 rounded-full',
-                    column.dotClass
-                  )}
+                  className={cn('relative inline-flex h-2.5 w-2.5 rounded-full', column.dotClass)}
                 />
               </span>
               <h3 className="text-sm font-semibold">{t(column.labelKey)}</h3>
@@ -86,18 +83,12 @@ export function CaseKanbanBoard({ cases, onCaseClick }: CaseKanbanBoardProps) {
             </div>
 
             <ScrollArea className="h-[calc(100vh-220px)]">
-              <div className="flex flex-col gap-3 rounded-lg border border-dashed border-border/60 p-3">
+              <div className="border-border/60 flex flex-col gap-3 rounded-lg border border-dashed p-3">
                 {columnCases.length === 0 && (
-                  <p className="py-8 text-center text-xs text-muted-foreground">
-                    {t('noItems')}
-                  </p>
+                  <p className="text-muted-foreground py-8 text-center text-xs">{t('noItems')}</p>
                 )}
                 {columnCases.map(caseItem => (
-                  <CaseKanbanCard
-                    key={caseItem.id}
-                    caseItem={caseItem}
-                    onClick={onCaseClick}
-                  />
+                  <CaseKanbanCard key={caseItem.id} caseItem={caseItem} onClick={onCaseClick} />
                 ))}
               </div>
             </ScrollArea>

@@ -1,12 +1,12 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { Monitor } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
+import { useTranslations } from 'next-intl'
 import { EmptyState } from '@/components/common/EmptyState'
-import { DashboardCard } from './DashboardCard'
+import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import type { AssetRisk } from '@/types'
+import { DashboardCard } from './DashboardCard'
 
 interface TopTargetedAssetsProps {
   assets: AssetRisk[]
@@ -45,18 +45,18 @@ export function TopTargetedAssets({ assets, className }: TopTargetedAssetsProps)
   return (
     <DashboardCard title={t('topTargetedAssets')} className={className}>
       <div className="space-y-1">
-        <div className="grid grid-cols-3 gap-2 text-xs font-bold text-muted-foreground uppercase tracking-wider pb-2 border-b border-border">
+        <div className="text-muted-foreground border-border grid grid-cols-3 gap-2 border-b pb-2 text-xs font-bold tracking-wider uppercase">
           <span>{t('asset')}</span>
           <span>{t('ip')}</span>
           <span className="text-end">{t('riskScore')}</span>
         </div>
-        {assets.map((asset) => (
+        {assets.map(asset => (
           <div
             key={asset.id}
-            className="grid grid-cols-3 gap-2 items-center py-2 text-sm border-b border-border last:border-b-0"
+            className="border-border grid grid-cols-3 items-center gap-2 border-b py-2 text-sm last:border-b-0"
           >
-            <span className="font-medium text-foreground truncate">{asset.name}</span>
-            <span className="font-mono text-xs text-muted-foreground">{asset.ip}</span>
+            <span className="text-foreground truncate font-medium">{asset.name}</span>
+            <span className="text-muted-foreground font-mono text-xs">{asset.ip}</span>
             <div className="flex justify-end">
               <Badge
                 variant="outline"

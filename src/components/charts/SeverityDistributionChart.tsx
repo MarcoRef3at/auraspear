@@ -1,13 +1,6 @@
 'use client'
 
-import {
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-  Legend,
-  Tooltip,
-} from 'recharts'
+import { ResponsiveContainer, PieChart, Pie, Cell, Legend, Tooltip } from 'recharts'
 import { SEVERITY_COLORS } from '@/lib/constants'
 
 interface SeverityDataPoint {
@@ -55,9 +48,7 @@ export function SeverityDistributionChart({ data }: SeverityDistributionChartPro
         />
         <Legend
           wrapperStyle={{ fontSize: '12px' }}
-          formatter={(value: string) => (
-            <span style={{ color: 'var(--foreground)' }}>{value}</span>
-          )}
+          formatter={(value: string) => <span style={{ color: 'var(--foreground)' }}>{value}</span>}
         />
       </PieChart>
     </ResponsiveContainer>

@@ -1,10 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import { useTranslations } from 'next-intl'
 import { Search } from 'lucide-react'
-import { Input } from '@/components/ui/input'
+import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import {
   Select,
   SelectContent,
@@ -40,7 +40,7 @@ export function IOCSearchBar({ onSearch, loading = false }: IOCSearchBarProps) {
   return (
     <form onSubmit={handleSubmit} className="flex items-center gap-3">
       <div className="relative flex-1">
-        <Search className="pointer-events-none absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <Search className="text-muted-foreground pointer-events-none absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2" />
         <Input
           value={query}
           onChange={e => setQuery(e.target.value)}

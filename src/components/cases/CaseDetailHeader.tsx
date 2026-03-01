@@ -1,12 +1,12 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { Calendar, User, Edit, Trash2, ExternalLink } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { SeverityBadge } from '@/components/common/SeverityBadge'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { SeverityBadge } from '@/components/common/SeverityBadge'
-import { formatDate } from '@/lib/utils'
 import { CaseStatus } from '@/enums'
+import { formatDate } from '@/lib/utils'
 import type { Case } from '@/types'
 
 interface CaseDetailHeaderProps {
@@ -31,15 +31,15 @@ export function CaseDetailHeader({
   const t = useTranslations('cases')
 
   return (
-    <div className="flex flex-col gap-4 border-b border-border pb-4">
+    <div className="border-border flex flex-col gap-4 border-b pb-4">
       <div className="flex items-start justify-between gap-4">
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-3">
-            <span className="font-mono text-sm text-muted-foreground">
-              {caseItem.caseNumber}
-            </span>
+            <span className="text-muted-foreground font-mono text-sm">{caseItem.caseNumber}</span>
             <Badge variant={statusVariantMap[caseItem.status]} className="capitalize">
-              {t(`status${caseItem.status === CaseStatus.OPEN ? 'Open' : caseItem.status === CaseStatus.IN_PROGRESS ? 'InProgress' : 'Closed'}`)}
+              {t(
+                `status${caseItem.status === CaseStatus.OPEN ? 'Open' : caseItem.status === CaseStatus.IN_PROGRESS ? 'InProgress' : 'Closed'}`
+              )}
             </Badge>
             <SeverityBadge severity={caseItem.severity} />
           </div>
@@ -68,7 +68,7 @@ export function CaseDetailHeader({
         </div>
       </div>
 
-      <div className="flex items-center gap-6 text-sm text-muted-foreground">
+      <div className="text-muted-foreground flex items-center gap-6 text-sm">
         <span className="flex items-center gap-1.5">
           <User className="h-3.5 w-3.5" />
           {caseItem.assignee}

@@ -14,9 +14,7 @@ interface CaseTaskListProps {
 export function CaseTaskList({ tasks, onToggleTask }: CaseTaskListProps) {
   const t = useTranslations('cases')
 
-  const completedCount = tasks.filter(
-    task => task.status === CaseTaskStatus.COMPLETED
-  ).length
+  const completedCount = tasks.filter(task => task.status === CaseTaskStatus.COMPLETED).length
   const totalCount = tasks.length
   const progressValue = totalCount > 0 ? (completedCount / totalCount) * 100 : 0
 
@@ -27,7 +25,7 @@ export function CaseTaskList({ tasks, onToggleTask }: CaseTaskListProps) {
           <span className="text-muted-foreground">
             {t('tasksCompleted', { completed: completedCount, total: totalCount })}
           </span>
-          <span className="font-mono text-xs text-muted-foreground">
+          <span className="text-muted-foreground font-mono text-xs">
             {Math.round(progressValue)}%
           </span>
         </div>
@@ -41,7 +39,7 @@ export function CaseTaskList({ tasks, onToggleTask }: CaseTaskListProps) {
           return (
             <label
               key={task.id}
-              className="flex cursor-pointer items-center gap-3 rounded-lg border border-border px-3 py-2.5 transition-colors hover:bg-muted/50"
+              className="border-border hover:bg-muted/50 flex cursor-pointer items-center gap-3 rounded-lg border px-3 py-2.5 transition-colors"
             >
               <Checkbox
                 checked={isCompleted}
@@ -51,18 +49,12 @@ export function CaseTaskList({ tasks, onToggleTask }: CaseTaskListProps) {
               />
               <div className="flex flex-1 items-center justify-between gap-2">
                 <span
-                  className={
-                    isCompleted
-                      ? 'text-sm text-muted-foreground line-through'
-                      : 'text-sm'
-                  }
+                  className={isCompleted ? 'text-muted-foreground text-sm line-through' : 'text-sm'}
                 >
                   {task.title}
                 </span>
                 {task.assignee && (
-                  <span className="text-xs text-muted-foreground">
-                    {task.assignee}
-                  </span>
+                  <span className="text-muted-foreground text-xs">{task.assignee}</span>
                 )}
               </div>
             </label>
@@ -70,9 +62,7 @@ export function CaseTaskList({ tasks, onToggleTask }: CaseTaskListProps) {
         })}
 
         {tasks.length === 0 && (
-          <p className="py-4 text-center text-sm text-muted-foreground">
-            {t('noTasks')}
-          </p>
+          <p className="text-muted-foreground py-4 text-center text-sm">{t('noTasks')}</p>
         )}
       </div>
     </div>

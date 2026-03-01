@@ -1,7 +1,7 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { Building2 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { DataTable } from '@/components/common/DataTable'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
@@ -46,15 +46,16 @@ export function TenantListTable({ tenants, loading, onTenantClick }: TenantListT
     {
       key: 'name',
       label: t('tenants.name'),
-      render: (value) => (
-        <span className="font-medium">{String(value ?? '')}</span>
-      ),
+      render: value => <span className="font-medium">{String(value ?? '')}</span>,
     },
     {
       key: 'environment',
       label: t('tenants.environment'),
-      render: (value) => (
-        <Badge variant="outline" className={cn('capitalize', getEnvironmentClass(String(value ?? '')))}>
+      render: value => (
+        <Badge
+          variant="outline"
+          className={cn('capitalize', getEnvironmentClass(String(value ?? '')))}
+        >
           {String(value ?? '')}
         </Badge>
       ),
@@ -62,7 +63,7 @@ export function TenantListTable({ tenants, loading, onTenantClick }: TenantListT
     {
       key: 'status',
       label: t('tenants.status'),
-      render: (value) => (
+      render: value => (
         <Badge variant="outline" className={cn('capitalize', getStatusClass(String(value ?? '')))}>
           {String(value ?? '')}
         </Badge>
@@ -71,16 +72,12 @@ export function TenantListTable({ tenants, loading, onTenantClick }: TenantListT
     {
       key: 'userCount',
       label: t('tenants.users'),
-      render: (value) => (
-        <span className="text-sm text-muted-foreground">{String(value ?? 0)}</span>
-      ),
+      render: value => <span className="text-muted-foreground text-sm">{String(value ?? 0)}</span>,
     },
     {
       key: 'alertCount',
       label: t('tenants.alerts'),
-      render: (value) => (
-        <span className="text-sm text-muted-foreground">{String(value ?? 0)}</span>
-      ),
+      render: value => <span className="text-muted-foreground text-sm">{String(value ?? 0)}</span>,
     },
   ]
 

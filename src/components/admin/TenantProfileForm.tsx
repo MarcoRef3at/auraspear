@@ -1,12 +1,12 @@
 'use client'
 
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Button } from '@/components/ui/button'
 import {
   Select,
   SelectContent,
@@ -65,14 +65,8 @@ export function TenantProfileForm({
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="space-y-2">
         <Label htmlFor="tenant-name">{t('tenant.name')}</Label>
-        <Input
-          id="tenant-name"
-          {...register('name')}
-          placeholder={t('tenant.namePlaceholder')}
-        />
-        {errors.name && (
-          <p className="text-sm text-destructive">{t('tenant.nameRequired')}</p>
-        )}
+        <Input id="tenant-name" {...register('name')} placeholder={t('tenant.namePlaceholder')} />
+        {errors.name && <p className="text-destructive text-sm">{t('tenant.nameRequired')}</p>}
       </div>
 
       <div className="space-y-2">
@@ -88,16 +82,14 @@ export function TenantProfileForm({
             <SelectItem value={TenantEnvironment.PRODUCTION}>
               {t('tenant.envProduction')}
             </SelectItem>
-            <SelectItem value={TenantEnvironment.STAGING}>
-              {t('tenant.envStaging')}
-            </SelectItem>
+            <SelectItem value={TenantEnvironment.STAGING}>{t('tenant.envStaging')}</SelectItem>
             <SelectItem value={TenantEnvironment.DEVELOPMENT}>
               {t('tenant.envDevelopment')}
             </SelectItem>
           </SelectContent>
         </Select>
         {errors.environment && (
-          <p className="text-sm text-destructive">{t('tenant.environmentRequired')}</p>
+          <p className="text-destructive text-sm">{t('tenant.environmentRequired')}</p>
         )}
       </div>
 

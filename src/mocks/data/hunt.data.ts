@@ -10,63 +10,118 @@ export const mockHuntSession: HuntSession = {
     {
       id: 'msg-001',
       role: MessageRole.SYSTEM,
-      content: 'Welcome to AI Threat Hunt. I can help you investigate threats across your environment. Describe what you are looking for, and I will query logs, correlate events, and surface findings.',
+      content:
+        'Welcome to AI Threat Hunt. I can help you investigate threats across your environment. Describe what you are looking for, and I will query logs, correlate events, and surface findings.',
       timestamp: '2026-03-01T09:00:00Z',
     },
     {
       id: 'msg-002',
       role: MessageRole.USER,
-      content: 'I want to investigate potential brute force attacks against our domain controller dc-01 over the past 7 days. Look for repeated failed authentication attempts from the same source IPs.',
+      content:
+        'I want to investigate potential brute force attacks against our domain controller dc-01 over the past 7 days. Look for repeated failed authentication attempts from the same source IPs.',
       timestamp: '2026-03-01T09:01:00Z',
     },
     {
       id: 'msg-003',
       role: MessageRole.AI,
-      content: 'I found significant brute force activity targeting dc-01. Here is my analysis:\n\n**Key Findings:**\n- **523 failed SSH attempts** from 198.51.100.22 within a 10-minute window on March 1st\n- **47 failed RDP attempts** from 203.0.113.88 spread across February 25-27\n- **15 account lockouts** triggered for 3 different user accounts (admin, root, m.jones)\n- Source IP 198.51.100.22 is associated with known botnet infrastructure per threat intelligence feeds\n\n**Targeted Accounts:** admin (312 attempts), root (156 attempts), m.jones (55 attempts), svc-backup (28 attempts)\n\n**Recommendation:** The primary attack from 198.51.100.22 appears automated and should be blocked at the perimeter. I recommend checking if any of the targeted accounts had successful logins during this period.',
+      content:
+        'I found significant brute force activity targeting dc-01. Here is my analysis:\n\n**Key Findings:**\n- **523 failed SSH attempts** from 198.51.100.22 within a 10-minute window on March 1st\n- **47 failed RDP attempts** from 203.0.113.88 spread across February 25-27\n- **15 account lockouts** triggered for 3 different user accounts (admin, root, m.jones)\n- Source IP 198.51.100.22 is associated with known botnet infrastructure per threat intelligence feeds\n\n**Targeted Accounts:** admin (312 attempts), root (156 attempts), m.jones (55 attempts), svc-backup (28 attempts)\n\n**Recommendation:** The primary attack from 198.51.100.22 appears automated and should be blocked at the perimeter. I recommend checking if any of the targeted accounts had successful logins during this period.',
       timestamp: '2026-03-01T09:01:30Z',
       reasoningSteps: [
-        { id: 'rs-001', label: 'Querying authentication logs for dc-01', status: ReasoningStepStatus.COMPLETED },
-        { id: 'rs-002', label: 'Filtering failed login events (Event ID 4625)', status: ReasoningStepStatus.COMPLETED },
-        { id: 'rs-003', label: 'Grouping by source IP and time window', status: ReasoningStepStatus.COMPLETED },
-        { id: 'rs-004', label: 'Cross-referencing IPs with threat intelligence', status: ReasoningStepStatus.COMPLETED },
-        { id: 'rs-005', label: 'Checking for successful logins from same sources', status: ReasoningStepStatus.COMPLETED },
+        {
+          id: 'rs-001',
+          label: 'Querying authentication logs for dc-01',
+          status: ReasoningStepStatus.COMPLETED,
+        },
+        {
+          id: 'rs-002',
+          label: 'Filtering failed login events (Event ID 4625)',
+          status: ReasoningStepStatus.COMPLETED,
+        },
+        {
+          id: 'rs-003',
+          label: 'Grouping by source IP and time window',
+          status: ReasoningStepStatus.COMPLETED,
+        },
+        {
+          id: 'rs-004',
+          label: 'Cross-referencing IPs with threat intelligence',
+          status: ReasoningStepStatus.COMPLETED,
+        },
+        {
+          id: 'rs-005',
+          label: 'Checking for successful logins from same sources',
+          status: ReasoningStepStatus.COMPLETED,
+        },
       ],
       actions: ['View 15 related events', 'Create case from findings', 'Block source IPs'],
     },
     {
       id: 'msg-004',
       role: MessageRole.USER,
-      content: 'Were there any successful logins from those source IPs after the brute force attempts? Also check if svc-backup account was used for any lateral movement.',
+      content:
+        'Were there any successful logins from those source IPs after the brute force attempts? Also check if svc-backup account was used for any lateral movement.',
       timestamp: '2026-03-01T09:03:00Z',
     },
     {
       id: 'msg-005',
       role: MessageRole.AI,
-      content: 'Good follow-up. Here are the results:\n\n**Successful Logins from Attack Sources:**\n- **No successful logins** from 198.51.100.22 or 203.0.113.88 were found. The brute force did not result in credential compromise.\n\n**svc-backup Account Activity:**\n- However, I found something concerning. The svc-backup account was **added to Domain Admins** on February 28th at 22:45 UTC, outside the approved change window.\n- After escalation, svc-backup performed **3 NTLM authentications** to file-server-02 and db-primary.\n- This privilege escalation has already been flagged in alert-008 and was attributed to a junior admin during emergency maintenance.\n\n**Assessment:** While the brute force itself was unsuccessful, the svc-backup privilege escalation warrants continued monitoring. I recommend enabling enhanced auditing for all service accounts.',
+      content:
+        'Good follow-up. Here are the results:\n\n**Successful Logins from Attack Sources:**\n- **No successful logins** from 198.51.100.22 or 203.0.113.88 were found. The brute force did not result in credential compromise.\n\n**svc-backup Account Activity:**\n- However, I found something concerning. The svc-backup account was **added to Domain Admins** on February 28th at 22:45 UTC, outside the approved change window.\n- After escalation, svc-backup performed **3 NTLM authentications** to file-server-02 and db-primary.\n- This privilege escalation has already been flagged in alert-008 and was attributed to a junior admin during emergency maintenance.\n\n**Assessment:** While the brute force itself was unsuccessful, the svc-backup privilege escalation warrants continued monitoring. I recommend enabling enhanced auditing for all service accounts.',
       timestamp: '2026-03-01T09:03:45Z',
       reasoningSteps: [
-        { id: 'rs-006', label: 'Searching for successful auth from attack IPs', status: ReasoningStepStatus.COMPLETED },
-        { id: 'rs-007', label: 'Tracing svc-backup account activity', status: ReasoningStepStatus.COMPLETED },
-        { id: 'rs-008', label: 'Checking group membership changes', status: ReasoningStepStatus.COMPLETED },
-        { id: 'rs-009', label: 'Correlating with existing alerts', status: ReasoningStepStatus.COMPLETED },
+        {
+          id: 'rs-006',
+          label: 'Searching for successful auth from attack IPs',
+          status: ReasoningStepStatus.COMPLETED,
+        },
+        {
+          id: 'rs-007',
+          label: 'Tracing svc-backup account activity',
+          status: ReasoningStepStatus.COMPLETED,
+        },
+        {
+          id: 'rs-008',
+          label: 'Checking group membership changes',
+          status: ReasoningStepStatus.COMPLETED,
+        },
+        {
+          id: 'rs-009',
+          label: 'Correlating with existing alerts',
+          status: ReasoningStepStatus.COMPLETED,
+        },
       ],
       actions: ['View svc-backup activity timeline', 'Open case for svc-backup escalation'],
     },
     {
       id: 'msg-006',
       role: MessageRole.USER,
-      content: 'Show me all events related to the svc-backup lateral movement after the privilege escalation.',
+      content:
+        'Show me all events related to the svc-backup lateral movement after the privilege escalation.',
       timestamp: '2026-03-01T09:05:00Z',
     },
     {
       id: 'msg-007',
       role: MessageRole.AI,
-      content: 'Here is the complete timeline of svc-backup activity after the privilege escalation:\n\n| Time (UTC) | Event | Target | Details |\n|---|---|---|---|\n| 22:45 | Group membership changed | dc-01 | Added to Domain Admins |\n| 22:48 | NTLM logon (Type 3) | file-server-02 | Network logon from dc-01 |\n| 22:52 | File access | file-server-02 | Accessed \\\\share\\backups |\n| 23:01 | NTLM logon (Type 3) | db-primary | Network logon from dc-01 |\n| 23:05 | SQL query executed | db-primary | SELECT on backup_config table |\n| 23:15 | Group membership changed | dc-01 | Removed from Domain Admins |\n\nThe activity appears consistent with emergency backup maintenance. The escalation window was 30 minutes. All actions were related to backup verification.\n\n**15 events** have been surfaced in the events panel for detailed review.',
+      content:
+        'Here is the complete timeline of svc-backup activity after the privilege escalation:\n\n| Time (UTC) | Event | Target | Details |\n|---|---|---|---|\n| 22:45 | Group membership changed | dc-01 | Added to Domain Admins |\n| 22:48 | NTLM logon (Type 3) | file-server-02 | Network logon from dc-01 |\n| 22:52 | File access | file-server-02 | Accessed \\\\share\\backups |\n| 23:01 | NTLM logon (Type 3) | db-primary | Network logon from dc-01 |\n| 23:05 | SQL query executed | db-primary | SELECT on backup_config table |\n| 23:15 | Group membership changed | dc-01 | Removed from Domain Admins |\n\nThe activity appears consistent with emergency backup maintenance. The escalation window was 30 minutes. All actions were related to backup verification.\n\n**15 events** have been surfaced in the events panel for detailed review.',
       timestamp: '2026-03-01T09:05:30Z',
       reasoningSteps: [
-        { id: 'rs-010', label: 'Building svc-backup activity timeline', status: ReasoningStepStatus.COMPLETED },
-        { id: 'rs-011', label: 'Correlating network logon events', status: ReasoningStepStatus.COMPLETED },
-        { id: 'rs-012', label: 'Enriching with file and database access logs', status: ReasoningStepStatus.COMPLETED },
+        {
+          id: 'rs-010',
+          label: 'Building svc-backup activity timeline',
+          status: ReasoningStepStatus.COMPLETED,
+        },
+        {
+          id: 'rs-011',
+          label: 'Correlating network logon events',
+          status: ReasoningStepStatus.COMPLETED,
+        },
+        {
+          id: 'rs-012',
+          label: 'Enriching with file and database access logs',
+          status: ReasoningStepStatus.COMPLETED,
+        },
       ],
       actions: ['Export timeline as CSV', 'Create case from findings'],
     },

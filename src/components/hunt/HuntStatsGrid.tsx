@@ -1,7 +1,7 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { Activity, Globe, ShieldAlert } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { Card, CardContent } from '@/components/ui/card'
 import { formatNumber } from '@/lib/utils'
 
@@ -56,7 +56,7 @@ export function HuntStatsGrid({ eventsFound, uniqueIps, threatScore }: HuntStats
                 <Icon className="h-5 w-5" />
               </div>
               <div className="flex flex-col gap-0.5">
-                <span className="text-xs text-muted-foreground">{stat.label}</span>
+                <span className="text-muted-foreground text-xs">{stat.label}</span>
                 <span className="text-xl font-bold tracking-tight">{stat.value}</span>
               </div>
             </CardContent>

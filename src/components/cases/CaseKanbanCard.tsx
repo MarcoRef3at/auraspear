@@ -1,12 +1,11 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { Link2, Clock } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import { formatRelativeTime } from '@/lib/utils'
-import { CaseStatus, CaseSeverity } from '@/enums'
+import { useTranslations } from 'next-intl'
 import { SeverityBadge } from '@/components/common/SeverityBadge'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { CaseStatus, CaseSeverity } from '@/enums'
+import { cn, formatRelativeTime } from '@/lib/utils'
 import type { Case } from '@/types'
 
 interface CaseKanbanCardProps {
@@ -46,7 +45,7 @@ export function CaseKanbanCard({ caseItem, onClick }: CaseKanbanCardProps) {
         }
       }}
       className={cn(
-        'group relative cursor-pointer overflow-hidden rounded-lg border border-border bg-card transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md',
+        'group border-border bg-card hover:border-primary/50 relative cursor-pointer overflow-hidden rounded-lg border transition-all hover:-translate-y-0.5 hover:shadow-md',
         isClosed && 'opacity-60 grayscale'
       )}
     >
@@ -57,27 +56,21 @@ export function CaseKanbanCard({ caseItem, onClick }: CaseKanbanCardProps) {
 
       <div className="flex flex-col gap-2.5 p-3 ps-4">
         <div className="flex items-start justify-between gap-2">
-          <span className="font-mono text-xs text-muted-foreground">
-            {caseItem.caseNumber}
-          </span>
+          <span className="text-muted-foreground font-mono text-xs">{caseItem.caseNumber}</span>
           <SeverityBadge severity={caseItem.severity} />
         </div>
 
-        <p className="line-clamp-2 text-sm font-medium leading-snug">
-          {caseItem.title}
-        </p>
+        <p className="line-clamp-2 text-sm leading-snug font-medium">{caseItem.title}</p>
 
         <div className="flex items-center justify-between pt-1">
           <div className="flex items-center gap-2">
             <Avatar size="sm">
               <AvatarFallback>{getInitials(caseItem.assignee)}</AvatarFallback>
             </Avatar>
-            <span className="text-xs text-muted-foreground">
-              {caseItem.assignee}
-            </span>
+            <span className="text-muted-foreground text-xs">{caseItem.assignee}</span>
           </div>
 
-          <div className="flex items-center gap-3 text-xs text-muted-foreground">
+          <div className="text-muted-foreground flex items-center gap-3 text-xs">
             {caseItem.linkedAlertIds.length > 0 && (
               <span className="flex items-center gap-1">
                 <Link2 className="h-3 w-3" />

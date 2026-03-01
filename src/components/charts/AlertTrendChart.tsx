@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import {
   ResponsiveContainer,
   AreaChart,
@@ -10,9 +11,8 @@ import {
   Tooltip,
   Legend,
 } from 'recharts'
-import { useTranslations } from 'next-intl'
-import type { AlertTrendPoint } from '@/types'
 import { SEVERITY_COLORS } from '@/lib/constants'
+import type { AlertTrendPoint } from '@/types'
 
 interface AlertTrendChartProps {
   data: AlertTrendPoint[]
@@ -50,12 +50,7 @@ export function AlertTrendChart({ data }: AlertTrendChartProps) {
           tickLine={false}
           axisLine={false}
         />
-        <YAxis
-          stroke="var(--muted-foreground)"
-          fontSize={12}
-          tickLine={false}
-          axisLine={false}
-        />
+        <YAxis stroke="var(--muted-foreground)" fontSize={12} tickLine={false} axisLine={false} />
         <Tooltip
           contentStyle={{
             backgroundColor: 'var(--card)',

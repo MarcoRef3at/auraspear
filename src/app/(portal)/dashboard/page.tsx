@@ -1,10 +1,15 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { Shield, AlertTriangle, Briefcase, Clock, BarChart3 } from 'lucide-react'
-import { PageHeader, KPICard, LoadingSpinner, EmptyState } from '@/components/common'
-import { DashboardCard, MITRETopTechniques, TopTargetedAssets, PipelineHealthBar } from '@/components/dashboard'
+import { useTranslations } from 'next-intl'
 import { AlertTrendChart } from '@/components/charts'
+import { PageHeader, KPICard, LoadingSpinner, EmptyState } from '@/components/common'
+import {
+  DashboardCard,
+  MITRETopTechniques,
+  TopTargetedAssets,
+  PipelineHealthBar,
+} from '@/components/dashboard'
 import { useKPIs, useAlertTrends, useMITREStats, useAssetRisks, usePipelineHealth } from '@/hooks'
 
 const KPI_ICONS = [
@@ -63,7 +68,7 @@ export default function DashboardPage() {
       {/* Alert Trend Chart */}
       <DashboardCard
         title={t('alertTrends')}
-        action={<span className="text-xs text-muted-foreground">{t('last7Days')}</span>}
+        action={<span className="text-muted-foreground text-xs">{t('last7Days')}</span>}
       >
         {trendsLoading ? <LoadingSpinner /> : <AlertTrendChart data={trends?.data ?? []} />}
       </DashboardCard>
@@ -71,7 +76,11 @@ export default function DashboardPage() {
       {/* Two column: MITRE + Assets */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <DashboardCard title={t('mitreTopTechniques')}>
-          {mitreLoading ? <LoadingSpinner /> : <MITRETopTechniques techniques={mitre?.data ?? []} />}
+          {mitreLoading ? (
+            <LoadingSpinner />
+          ) : (
+            <MITRETopTechniques techniques={mitre?.data ?? []} />
+          )}
         </DashboardCard>
         <DashboardCard title={t('topTargetedAssets')}>
           {assetsLoading ? <LoadingSpinner /> : <TopTargetedAssets assets={assets?.data ?? []} />}
@@ -80,7 +89,11 @@ export default function DashboardPage() {
 
       {/* Pipeline Health */}
       <DashboardCard title={t('pipelineHealth')}>
-        {pipelineLoading ? <LoadingSpinner /> : <PipelineHealthBar services={pipeline?.data ?? []} />}
+        {pipelineLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <PipelineHealthBar services={pipeline?.data ?? []} />
+        )}
       </DashboardCard>
     </div>
   )

@@ -3,18 +3,12 @@ import { mockAlerts } from '@/mocks/data/alerts.data'
 
 export const dynamic = 'force-dynamic'
 
-export async function POST(
-  _request: Request,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export async function POST(_request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const alert = mockAlerts.find(a => a.id === id)
 
   if (!alert) {
-    return NextResponse.json(
-      { error: 'Alert not found' },
-      { status: 404 }
-    )
+    return NextResponse.json({ error: 'Alert not found' }, { status: 404 })
   }
 
   const investigation = {
@@ -31,9 +25,7 @@ export async function POST(
     ],
     relatedAlerts: mockAlerts
       .filter(
-        a =>
-          a.id !== alert.id &&
-          (a.agentName === alert.agentName || a.sourceIp === alert.sourceIp)
+        a => a.id !== alert.id && (a.agentName === alert.agentName || a.sourceIp === alert.sourceIp)
       )
       .slice(0, 3)
       .map(a => a.id),

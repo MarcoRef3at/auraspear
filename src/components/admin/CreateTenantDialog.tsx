@@ -1,9 +1,10 @@
 'use client'
 
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -13,7 +14,6 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Button } from '@/components/ui/button'
 import {
   Select,
   SelectContent,
@@ -97,9 +97,7 @@ export function CreateTenantDialog({
               {...register('name')}
               placeholder={t('tenants.tenantNamePlaceholder')}
             />
-            {errors.name && (
-              <p className="text-sm text-destructive">{errors.name.message}</p>
-            )}
+            {errors.name && <p className="text-destructive text-sm">{errors.name.message}</p>}
           </div>
 
           <div className="space-y-2">
@@ -115,9 +113,7 @@ export function CreateTenantDialog({
                 <SelectItem value={TenantEnvironment.PRODUCTION}>
                   {t('tenants.envProduction')}
                 </SelectItem>
-                <SelectItem value={TenantEnvironment.STAGING}>
-                  {t('tenants.envStaging')}
-                </SelectItem>
+                <SelectItem value={TenantEnvironment.STAGING}>{t('tenants.envStaging')}</SelectItem>
                 <SelectItem value={TenantEnvironment.DEVELOPMENT}>
                   {t('tenants.envDevelopment')}
                 </SelectItem>

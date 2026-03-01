@@ -1,9 +1,9 @@
 'use client'
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ThemeProvider } from 'next-themes'
-import { NextIntlClientProvider } from 'next-intl'
 import { useState, useEffect, type ReactNode } from 'react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { NextIntlClientProvider } from 'next-intl'
+import { ThemeProvider } from 'next-themes'
 
 interface ProvidersProps {
   children: ReactNode

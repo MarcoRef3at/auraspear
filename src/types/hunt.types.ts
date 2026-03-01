@@ -1,5 +1,4 @@
-import type { HuntStatus, MessageRole, ReasoningStepStatus } from '@/enums'
-import type { AlertSeverity } from '@/enums'
+import type { HuntStatus, MessageRole, ReasoningStepStatus, AlertSeverity } from '@/enums'
 
 export interface ReasoningStep {
   id: string

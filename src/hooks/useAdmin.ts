@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { POLLING_INTERVAL } from '@/lib/constants'
 import { adminService } from '@/services'
 import type { CreateTenantInput } from '@/services/admin.service'
-import { POLLING_INTERVAL } from '@/lib/constants'
 
 export function useTenants() {
   return useQuery({

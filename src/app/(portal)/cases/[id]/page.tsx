@@ -1,18 +1,13 @@
 'use client'
 
 import { use } from 'react'
-import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { ArrowLeft, FileQuestion } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { CaseDetailHeader, CaseTimeline, CaseTaskList, CaseArtifactPanel } from '@/components/cases'
+import { LoadingSpinner, EmptyState } from '@/components/common'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { LoadingSpinner, EmptyState } from '@/components/common'
-import {
-  CaseDetailHeader,
-  CaseTimeline,
-  CaseTaskList,
-  CaseArtifactPanel,
-} from '@/components/cases'
 import { useCase } from '@/hooks'
 
 interface CaseDetailPageProps {

@@ -21,12 +21,12 @@ interface NotificationState {
 export const useNotificationStore = create<NotificationState>((set, get) => ({
   items: [],
   unreadCount: 0,
-  addNotification: (notification) =>
+  addNotification: notification =>
     set(state => ({
       items: [notification, ...state.items],
       unreadCount: state.unreadCount + 1,
     })),
-  markAsRead: (id) =>
+  markAsRead: id =>
     set(state => ({
       items: state.items.map(item => (item.id === id ? { ...item, read: true } : item)),
       unreadCount: Math.max(0, get().unreadCount - 1),

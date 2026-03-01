@@ -1,10 +1,10 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { Server } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { EmptyState } from '@/components/common/EmptyState'
-import { ServiceHealthCard } from './ServiceHealthCard'
 import type { ServiceHealth } from '@/types'
+import { ServiceHealthCard } from './ServiceHealthCard'
 
 interface ServiceHealthGridProps {
   services: ServiceHealth[]

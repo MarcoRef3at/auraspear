@@ -1,9 +1,9 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { LayoutGrid, List, ArrowUpDown } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { useTranslations } from 'next-intl'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import {
   Select,
   SelectContent,
@@ -11,8 +11,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { cn } from '@/lib/utils'
 import { CaseSeverity } from '@/enums'
+import { cn } from '@/lib/utils'
 
 enum CaseViewMode {
   BOARD = 'board',
@@ -56,7 +56,7 @@ export function CaseToolbar({
   return (
     <div className="flex items-center justify-between gap-4">
       <div className="flex items-center gap-2">
-        <div className="flex items-center rounded-lg border border-border">
+        <div className="border-border flex items-center rounded-lg border">
           <Button
             variant={viewMode === CaseViewMode.BOARD ? 'default' : 'ghost'}
             size="sm"
@@ -77,7 +77,7 @@ export function CaseToolbar({
           </Button>
         </div>
 
-        <div className="mx-2 h-6 w-px bg-border" />
+        <div className="bg-border mx-2 h-6 w-px" />
 
         <div className="flex items-center gap-1.5">
           {severityFilters.map(severity => (
@@ -85,9 +85,7 @@ export function CaseToolbar({
               key={severity}
               type="button"
               onClick={() =>
-                onSeverityFilterChange(
-                  activeSeverityFilter === severity ? undefined : severity
-                )
+                onSeverityFilterChange(activeSeverityFilter === severity ? undefined : severity)
               }
               className={cn(
                 'transition-opacity',
@@ -105,7 +103,7 @@ export function CaseToolbar({
       </div>
 
       <div className="flex items-center gap-2">
-        <ArrowUpDown className="h-4 w-4 text-muted-foreground" />
+        <ArrowUpDown className="text-muted-foreground h-4 w-4" />
         <Select value={sortField} onValueChange={v => onSortFieldChange(v as CaseSortField)}>
           <SelectTrigger className="w-[140px]" size="sm">
             <SelectValue />

@@ -8,10 +8,7 @@ interface MonoTextProps {
 export function MonoText({ children, className }: MonoTextProps) {
   return (
     <span
-      className={cn(
-        'rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground',
-        className
-      )}
+      className={cn('bg-muted text-foreground rounded px-1.5 py-0.5 font-mono text-xs', className)}
     >
       {children}
     </span>

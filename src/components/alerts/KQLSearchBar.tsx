@@ -1,10 +1,10 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { Search } from 'lucide-react'
-import { Input } from '@/components/ui/input'
+import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
 
 interface KQLSearchBarProps {
   value: string
@@ -13,12 +13,7 @@ interface KQLSearchBarProps {
   onSavedSearches?: () => void
 }
 
-export function KQLSearchBar({
-  value,
-  onChange,
-  onSubmit,
-  onSavedSearches,
-}: KQLSearchBarProps) {
+export function KQLSearchBar({ value, onChange, onSubmit, onSavedSearches }: KQLSearchBarProps) {
   const t = useTranslations('alerts')
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -31,10 +26,10 @@ export function KQLSearchBar({
     <Card className="p-3">
       <div className="flex items-center gap-2">
         <div className="relative flex-1">
-          <Search className="absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Search className="text-muted-foreground absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2" />
           <Input
             value={value}
-            onChange={(e) => onChange(e.target.value)}
+            onChange={e => onChange(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder={t('searchPlaceholder')}
             className="ps-9 font-mono text-sm"

@@ -1,8 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { cn } from '@/lib/utils'
-import { formatTimestamp } from '@/lib/utils'
+import { cn, formatTimestamp } from '@/lib/utils'
 import type { CaseTimelineEntry } from '@/types'
 
 interface CaseTimelineProps {
@@ -26,7 +25,7 @@ export function CaseTimeline({ entries }: CaseTimelineProps) {
   if (entries.length === 0) {
     return (
       <div className="flex items-center justify-center py-8">
-        <p className="text-sm text-muted-foreground">{t('noTimeline')}</p>
+        <p className="text-muted-foreground text-sm">{t('noTimeline')}</p>
       </div>
     )
   }
@@ -44,19 +43,17 @@ export function CaseTimeline({ entries }: CaseTimelineProps) {
                 className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full"
                 style={{ backgroundColor: color }}
               />
-              {!isLast && (
-                <div className="w-px flex-1 bg-border" />
-              )}
+              {!isLast && <div className="bg-border w-px flex-1" />}
             </div>
 
             <div className={cn('flex flex-col gap-1 pb-6', isLast && 'pb-0')}>
               <div className="flex items-baseline gap-2">
                 <span className="text-sm font-medium">{entry.actor}</span>
-                <span className="text-xs text-muted-foreground">
+                <span className="text-muted-foreground text-xs">
                   {formatTimestamp(entry.timestamp)}
                 </span>
               </div>
-              <p className="text-sm text-muted-foreground">{entry.description}</p>
+              <p className="text-muted-foreground text-sm">{entry.description}</p>
             </div>
           </div>
         )

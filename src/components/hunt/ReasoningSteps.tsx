@@ -1,8 +1,8 @@
 'use client'
 
 import { CheckCircle2, Loader2, Circle } from 'lucide-react'
-import { cn } from '@/lib/utils'
 import { ReasoningStepStatus } from '@/enums'
+import { cn } from '@/lib/utils'
 import type { ReasoningStep } from '@/types'
 
 interface ReasoningStepsProps {
@@ -52,9 +52,7 @@ export function ReasoningSteps({ steps }: ReasoningStepsProps) {
                 config.animate && 'animate-spin'
               )}
             />
-            <span className={cn('text-xs', config.textClass)}>
-              {step.label}
-            </span>
+            <span className={cn('text-xs', config.textClass)}>{step.label}</span>
           </div>
         )
       })}

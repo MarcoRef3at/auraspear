@@ -19,11 +19,7 @@ interface MITREBarChartProps {
 export function MITREBarChart({ data }: MITREBarChartProps) {
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <BarChart
-        data={data}
-        layout="vertical"
-        margin={{ top: 5, right: 20, left: 80, bottom: 5 }}
-      >
+      <BarChart data={data} layout="vertical" margin={{ top: 5, right: 20, left: 80, bottom: 5 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" horizontal={false} />
         <XAxis
           type="number"
@@ -50,7 +46,7 @@ export function MITREBarChart({ data }: MITREBarChartProps) {
             fontSize: '12px',
           }}
           formatter={(value: number | undefined) => [value ?? 0, 'Count']}
-          labelFormatter={(label) => label}
+          labelFormatter={label => label}
         />
         <Bar dataKey="count" radius={[0, 4, 4, 0]} maxBarSize={24}>
           {data.map(entry => (

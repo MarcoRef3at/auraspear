@@ -1,7 +1,7 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -37,11 +37,11 @@ export function Pagination({ page, totalPages, onPageChange, total }: Pagination
   return (
     <div className="flex items-center justify-between gap-4">
       {total !== undefined && (
-        <p className="text-sm text-muted-foreground">
+        <p className="text-muted-foreground text-sm">
           {total} {t('rows')}
         </p>
       )}
-      <div className="flex items-center gap-1 ms-auto">
+      <div className="ms-auto flex items-center gap-1">
         <Button
           variant="outline"
           size="icon-sm"

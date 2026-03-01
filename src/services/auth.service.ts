@@ -18,9 +18,7 @@ export const authService = {
   login: (email: string, password: string) =>
     api.post<ApiResponse<LoginResponse>>('/auth/login', { email, password }).then(r => r.data),
 
-  logout: () =>
-    api.post<ApiResponse<null>>('/auth/logout').then(r => r.data),
+  logout: () => api.post<ApiResponse<null>>('/auth/logout').then(r => r.data),
 
-  getMe: () =>
-    api.get<ApiResponse<AuthUser>>('/auth/me').then(r => r.data),
+  getMe: () => api.get<ApiResponse<AuthUser>>('/auth/me').then(r => r.data),
 }

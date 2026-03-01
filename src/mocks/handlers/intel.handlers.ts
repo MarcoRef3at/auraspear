@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw'
-import { mockMISPEvents, mockIOCCorrelations } from '../data/intel.data'
 import type { MISPEvent, IOCCorrelation, PaginationMeta } from '@/types'
+import { mockMISPEvents, mockIOCCorrelations } from '../data/intel.data'
 
 export const intelHandlers = [
   http.get('/api/intel/misp-events', ({ request }) => {
@@ -53,9 +53,7 @@ export const intelHandlers = [
 
     if (query) {
       const lowerQuery = query.toLowerCase()
-      filtered = filtered.filter(ioc =>
-        ioc.iocValue.toLowerCase().includes(lowerQuery)
-      )
+      filtered = filtered.filter(ioc => ioc.iocValue.toLowerCase().includes(lowerQuery))
     }
 
     if (iocType) {

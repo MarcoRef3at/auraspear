@@ -1,8 +1,8 @@
 'use client'
 
+import { Sun, Moon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useTheme } from 'next-themes'
-import { Sun, Moon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export function ThemeSwitcher() {
@@ -23,9 +23,9 @@ export function ThemeSwitcher() {
       aria-label={isDark ? t('lightMode') : t('darkMode')}
     >
       {isDark ? (
-        <Sun className="h-4 w-4 text-muted-foreground" />
+        <Sun className="text-muted-foreground h-4 w-4" />
       ) : (
-        <Moon className="h-4 w-4 text-muted-foreground" />
+        <Moon className="text-muted-foreground h-4 w-4" />
       )}
     </Button>
   )

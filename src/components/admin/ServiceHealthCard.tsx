@@ -2,8 +2,8 @@
 
 import { useTranslations } from 'next-intl'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { cn, formatPercentage, formatRelativeTime } from '@/lib/utils'
 import { ServiceStatus } from '@/enums'
+import { cn, formatPercentage, formatRelativeTime } from '@/lib/utils'
 import type { ServiceHealth } from '@/types'
 
 interface ServiceHealthCardProps {
@@ -48,7 +48,10 @@ export function ServiceHealthCard({ service }: ServiceHealthCardProps) {
       <CardHeader className="pb-2">
         <CardTitle className="flex items-center gap-2 text-sm">
           <span
-            className={cn('inline-block h-2.5 w-2.5 rounded-full', getStatusDotClass(service.status))}
+            className={cn(
+              'inline-block h-2.5 w-2.5 rounded-full',
+              getStatusDotClass(service.status)
+            )}
           />
           {service.name}
         </CardTitle>

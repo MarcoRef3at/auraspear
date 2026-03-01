@@ -1,7 +1,6 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { useTranslations } from 'next-intl'
 import {
   LayoutDashboard,
   Bell,
@@ -10,15 +9,17 @@ import {
   Globe,
   Settings,
   Server,
+  Plug,
   PanelLeftClose,
   PanelLeftOpen,
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { useUIStore } from '@/stores'
-import { Button } from '@/components/ui/button'
 import { BrandLogo } from './BrandLogo'
-import { SidebarNavItem } from './SidebarNavItem'
 import { SidebarHealthFooter } from './SidebarHealthFooter'
+import { SidebarNavItem } from './SidebarNavItem'
 
 interface NavSection {
   label: string
@@ -47,13 +48,12 @@ export function Sidebar() {
     },
     {
       label: t('nav.intelligence'),
-      items: [
-        { icon: Globe, label: t('nav.intel'), href: '/intel' },
-      ],
+      items: [{ icon: Globe, label: t('nav.intel'), href: '/intel' }],
     },
     {
       label: t('nav.system'),
       items: [
+        { icon: Plug, label: t('nav.connectors'), href: '/connectors' },
         { icon: Settings, label: t('nav.tenantConfig'), href: '/admin/tenant' },
         { icon: Server, label: t('nav.systemAdmin'), href: '/admin/system' },
       ],
@@ -63,14 +63,16 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        'flex h-screen flex-col border-r border-sidebar-border bg-sidebar transition-all duration-300',
+        'border-sidebar-border bg-sidebar flex h-screen flex-col border-r transition-all duration-300',
         sidebarCollapsed ? 'w-16' : 'w-64'
       )}
     >
-      <div className={cn(
-        'flex items-center border-b border-sidebar-border p-4',
-        sidebarCollapsed ? 'justify-center' : 'justify-between'
-      )}>
+      <div
+        className={cn(
+          'border-sidebar-border flex items-center border-b p-4',
+          sidebarCollapsed ? 'justify-center' : 'justify-between'
+        )}
+      >
         <BrandLogo collapsed={sidebarCollapsed} />
         {!sidebarCollapsed && (
           <Button
@@ -79,7 +81,7 @@ export function Sidebar() {
             onClick={toggleSidebar}
             aria-label={t('layout.collapseSidebar')}
           >
-            <PanelLeftClose className="h-4 w-4 text-muted-foreground" />
+            <PanelLeftClose className="text-muted-foreground h-4 w-4" />
           </Button>
         )}
       </div>
@@ -92,7 +94,7 @@ export function Sidebar() {
             onClick={toggleSidebar}
             aria-label={t('layout.expandSidebar')}
           >
-            <PanelLeftOpen className="h-4 w-4 text-muted-foreground" />
+            <PanelLeftOpen className="text-muted-foreground h-4 w-4" />
           </Button>
         </div>
       )}
@@ -102,7 +104,7 @@ export function Sidebar() {
           {sections.map(section => (
             <div key={section.label}>
               {!sidebarCollapsed && (
-                <h3 className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <h3 className="text-muted-foreground mb-2 px-3 text-xs font-semibold tracking-wider uppercase">
                   {section.label}
                 </h3>
               )}

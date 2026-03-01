@@ -1,13 +1,12 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { Shield, Users } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { DataTable } from '@/components/common/DataTable'
-import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { cn } from '@/lib/utils'
-import { formatRelativeTime } from '@/lib/utils'
+import { Badge } from '@/components/ui/badge'
 import { UserRole } from '@/enums'
+import { cn, formatRelativeTime } from '@/lib/utils'
 import type { TenantUser, Column } from '@/types'
 
 interface TenantUserTableProps {
@@ -65,11 +64,8 @@ export function TenantUserTable({ users, loading = false, onUserClick }: TenantU
     {
       key: 'role',
       label: t('users.role'),
-      render: (value) => (
-        <Badge
-          variant="outline"
-          className={cn('capitalize', getRoleBadgeClass(value as UserRole))}
-        >
+      render: value => (
+        <Badge variant="outline" className={cn('capitalize', getRoleBadgeClass(value as UserRole))}>
           {String(value ?? '')}
         </Badge>
       ),
@@ -77,7 +73,7 @@ export function TenantUserTable({ users, loading = false, onUserClick }: TenantU
     {
       key: 'status',
       label: t('users.status'),
-      render: (value) => {
+      render: value => {
         const status = String(value ?? '')
         const isActive = status === 'active'
         return (
@@ -96,8 +92,8 @@ export function TenantUserTable({ users, loading = false, onUserClick }: TenantU
     {
       key: 'lastLogin',
       label: t('users.lastLogin'),
-      render: (value) => (
-        <span className="text-sm text-muted-foreground">
+      render: value => (
+        <span className="text-muted-foreground text-sm">
           {value ? formatRelativeTime(String(value)) : t('users.never')}
         </span>
       ),
@@ -106,13 +102,12 @@ export function TenantUserTable({ users, loading = false, onUserClick }: TenantU
       key: 'mfaEnabled',
       label: t('users.mfa'),
       className: 'text-center',
-      render: (value) => (
+      render: value =>
         value === true ? (
-          <Shield className="mx-auto h-4 w-4 text-status-success" />
+          <Shield className="text-status-success mx-auto h-4 w-4" />
         ) : (
           <span className="text-muted-foreground">-</span>
-        )
-      ),
+        ),
     },
   ]
 

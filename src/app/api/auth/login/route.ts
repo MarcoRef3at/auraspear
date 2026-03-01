@@ -9,19 +9,13 @@ export async function POST(request: Request) {
   const password = body['password'] as string | undefined
 
   if (!email || !password) {
-    return NextResponse.json(
-      { error: 'Email and password are required' },
-      { status: 400 }
-    )
+    return NextResponse.json({ error: 'Email and password are required' }, { status: 400 })
   }
 
   const user = mockUsers.find(u => u.email === email)
 
   if (!user) {
-    return NextResponse.json(
-      { error: 'Invalid credentials' },
-      { status: 401 }
-    )
+    return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
   }
 
   return NextResponse.json({

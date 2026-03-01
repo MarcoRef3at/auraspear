@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import type { UserRole } from '@/enums'
 import { mockUsers } from '@/mocks/data/admin.data'
 import type { TenantUser } from '@/types'
-import type { UserRole } from '@/enums'
 
 export const dynamic = 'force-dynamic'
 

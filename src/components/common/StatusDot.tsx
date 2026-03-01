@@ -30,7 +30,7 @@ export function StatusDot({ status, size = 'sm' }: StatusDotProps) {
     <span className="relative inline-flex">
       <span
         className={cn(
-          'animate-ping absolute inline-flex rounded-full opacity-75',
+          'absolute inline-flex animate-ping rounded-full opacity-75',
           SIZE_MAP[size],
           PING_COLOR_MAP[status]
         )}

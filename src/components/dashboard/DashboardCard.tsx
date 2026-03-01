@@ -1,7 +1,7 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import type { ReactNode } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 interface DashboardCardProps {
   title: string
@@ -14,7 +14,7 @@ export function DashboardCard({ title, action, children, className }: DashboardC
   return (
     <Card className={className}>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+        <CardTitle className="text-muted-foreground text-sm font-semibold tracking-wider uppercase">
           {title}
         </CardTitle>
         {action}
